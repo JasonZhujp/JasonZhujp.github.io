@@ -4,11 +4,131 @@
   
   
   <entry>
+    <title>【论文随笔】COMBO</title>
+    <link href="/2023/03/31/paper-offline-rl-03/"/>
+    <url>/2023/03/31/paper-offline-rl-03/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>Provide a safeguard against distribution shift and model exploitation by partitioning state space into <strong>known and unknown regions</strong> according to total variation divergence (implemented by maximum ensemble discrepancy), and then constructing <strong>pessimistic MDP</strong> based on punished reward and dynamics with the help of additional <strong>absorbing state</strong>.</p><h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ul><li>Prove the upper and lower bound of any offline policy trained under pessimistic MDP.</li></ul><h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><p><img src="/img/post_img/paper-offline-rl-02_1.png"></p><ol><li>Learn approximate dynamics model using offline dataset. [2-layer ReLU-MLPs]</li><li>α-USAD: detect unknown state-action pairs by tracking uncertainty(ensemble discrepancy) using ensembles of dynamics models. [ensemble of 4 dynamics models]</li><li>Construct pessimistic MDP which punishes policy that visit unknown states by modifying reward and transition for unknown state-action pairs.</li><li>Use a planner to train offline policy under pessimistic MDP.[model-based NPG]</li></ol><h2 id="Env-amp-Baseline"><a href="#Env-amp-Baseline" class="headerlink" title="Env &amp; Baseline"></a>Env &amp; Baseline</h2><p>MuJoCo(continuous)<br>BCQ, BEAR, BRAC, naive MBRL</p><h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ul><li>MOReL vs baselines $\to$ policy performance</li><li>MOReL vs naive MBRL $\to$ importance of pessimistic MDP</li><li>Pessimistic MDP VS real environment $\to$ value in P-MDP never substantially exceeds the latter</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>学术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RL</tag>
+      
+      <tag>Offline</tag>
+      
+      <tag>Algorithm</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>【论文随笔】MOReL</title>
+    <link href="/2023/03/31/paper-offline-rl-02/"/>
+    <url>/2023/03/31/paper-offline-rl-02/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>Provide a safeguard against distribution shift and model exploitation by partitioning state space into <strong>known and unknown regions</strong> according to total variation divergence (implemented by maximum ensemble discrepancy), and then constructing <strong>pessimistic MDP</strong> based on punished reward and dynamics with the help of additional <strong>absorbing state</strong>.</p><h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ul><li>Prove the upper and lower bound of any offline policy trained under pessimistic MDP.</li></ul><h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><p><img src="/img/post_img/paper-offline-rl-02_1.png"></p><ol><li>Learn approximate dynamics model using offline dataset. [2-layer ReLU-MLPs]</li><li>α-USAD: detect unknown state-action pairs by tracking uncertainty(ensemble discrepancy) using ensembles of dynamics models. [ensemble of 4 dynamics models]</li><li>Construct pessimistic MDP which punishes policy that visit unknown states by modifying reward and transition for unknown state-action pairs.</li><li>Use a planner to train offline policy under pessimistic MDP.[model-based NPG]</li></ol><h2 id="Env-amp-Baseline"><a href="#Env-amp-Baseline" class="headerlink" title="Env &amp; Baseline"></a>Env &amp; Baseline</h2><p>MuJoCo(continuous)<br>BCQ, BEAR, BRAC, naive MBRL</p><h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ul><li>MOReL vs baselines $\to$ policy performance</li><li>MOReL vs naive MBRL $\to$ importance of pessimistic MDP</li><li>Pessimistic MDP VS real environment $\to$ value in P-MDP never substantially exceeds the latter</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>学术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RL</tag>
+      
+      <tag>Offline</tag>
+      
+      <tag>Algorithm</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>【论文随笔】MOPO</title>
+    <link href="/2023/03/31/paper-offline-rl-01/"/>
+    <url>/2023/03/31/paper-offline-rl-01/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>Encourage agent to take actions outside of offline dataset in order to <strong>generalize</strong> to OOD behaviors by making a trade off between <strong>risk</strong>(based on model error quantified by predicted variance) and <strong>gain</strong>(expected reward).</p><h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ul><li>Show the precise relationship between the performance of a policy under real dynamics $T$ and learned dynamics $\hat{T}$ measured by the divergence between $T$ and $\hat{T}$.</li><li>Give theoretical guarantees for MOPO based on the admissible error estimator $u\left(s,a\right)$. And how “trand off risk and return” reflected by the return of learned policy.</li></ul><h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><p><img src="/img/post_img/paper-offline-rl-01_1.png"></p><ol><li>The model is trained via a neural network that outputs a Gaussian distribution over the next state and reward. Learn an ensemble of dynamics models via maximum likelihood.</li><li>Use the maximum standard deviation of the learned models as uncertainty error estimater $u\left(s,a\right)$.</li><li>Calculate the uncertainty penalized reward $\tilde{r}$ and obtain the new dynamics $\hat{T}$.</li><li>Run any RL algo on MDP with $\hat{T}$ and $\tilde{r}$ until convergence to obtain $\pi^{*}$.</li></ol><h2 id="Env-amp-Baseline"><a href="#Env-amp-Baseline" class="headerlink" title="Env &amp; Baseline"></a>Env &amp; Baseline</h2><p>D4RL(continuous)<br>BEAR, BRAC, BRAC-v, BRAC-p</p><h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ul><li>MOPO vs baselines on standard D4RL $\to$ policy performance</li><li>MOPO vs baselines on self-construct D4RL $\to$ exploration ability &amp; OOD generalization</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>学术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RL</tag>
+      
+      <tag>Offline</tag>
+      
+      <tag>Algorithm</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>【潮流资讯】23年第14周</title>
+    <link href="/2023/03/31/fashion-23-14/"/>
+    <url>/2023/03/31/fashion-23-14/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Nissin日清食品推出全新「早餐」口味杯面"><a href="#Nissin日清食品推出全新「早餐」口味杯面" class="headerlink" title="Nissin日清食品推出全新「早餐」口味杯面"></a>Nissin日清食品推出全新「早餐」口味杯面</h2><p><img src="/img/post_img/fashion-23-14_1.png" alt="难以想像的枫糖浆、松饼、煎蛋、香肠混合味道"><br>&emsp;&emsp;日清食品似乎计划占领人类的早餐选择，近日正式推出一款「早餐」风味的全新杯面，此杯面除了面条本身之外，还结合了枫糖浆、松饼、香肠和煎蛋等早餐食物的味道，而融合这些独特味道的关键就是酱汁，日清食品还鼓励人们通过辣酱、糖浆、白饭等食材来客制自己的早餐杯面。此款日清早餐口味杯面现在已经在Walmart等全球指定通路限量上架，售价 $1.18 美元。</p><h2 id="UNDERCOVER-x-Nike-Moc-Flow推出两款全新联名配色"><a href="#UNDERCOVER-x-Nike-Moc-Flow推出两款全新联名配色" class="headerlink" title="UNDERCOVER x Nike Moc Flow推出两款全新联名配色"></a>UNDERCOVER x Nike Moc Flow推出两款全新联名配色</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="/img/post_img/fashion-23-14_2.png" alt="UNDERCOVER x Nike Moc Flow 黑色"></div><div class="group-image-wrap"><img src="/img/post_img/fashion-23-14_3.png" alt="UNDERCOVER x Nike Moc Flow 棕色"></div></div></div><p>&emsp;&emsp;UNDERCOVER x Nike Moc Flow 联名系列鞋款再度迎来两款新作。<br>&emsp;&emsp;首先能看到全黑款式以上乘绒面革制成鞋面，鞋面外侧后段压印有 UNDERCOVER Jun Takahashi 字样象征身份，搭配熏黑鞋跟模具与鞋带束扣，最后搭载泼墨 React 泡棉中底。第二款棕色版本设计大致维持相同轮廓，不过与棕色鞋面相应的鲜明的蓝色模具和白色鞋带束扣、灰色中底。<br>&emsp;&emsp;上述两款 UNDERCOVER x Nike Moc Flow 将在 4 月 12 日登陆 Nike 和指定零售商上架，售价 $160 美元。 </p><h2 id="Levi’s宣布未来将推出「AI-模特」功能"><a href="#Levi’s宣布未来将推出「AI-模特」功能" class="headerlink" title="Levi’s宣布未来将推出「AI 模特」功能"></a>Levi’s宣布未来将推出「AI 模特」功能</h2><p><img src="/img/post_img/fashion-23-14_4.png" alt="任意调整模特的年齡、肤色、体态"><br>&emsp;&emsp;Levi’s 早先正式宣布与数位时尚工作室 Lalaland.ai 建立合作伙伴关系，旨在为官网各产品生成穿著服装的虚拟模型，提供顾客更全面的实穿参考。由于时间、预算成本的考量，各家成衣品牌往往只能以有限的模特来拍摄产品型录，然而面对体态、肤色等状况皆有差异的万千消费者来说，参考价值著实因人而异。而通过与 Lalaland.ai 人工智能技术的整合，Levi’s 未来就能够因应年齡、肤色、体型等各项因素来展示最真实的模特样貌。<br>&emsp;&emsp;「虽然人工智能可能永远不会完全取代人类模特，但我们对 AI 提供崭新消费者体验的潜在能力感到兴奋。」Levi’s 全球数位兼整合科技策略总监 Amy Gershkoff Bolles 如此提到，「我们将时尚和技术视为一门艺术和一门科学，我们很高兴能与 Lalaland.ai 合作，这家公司拥有如此高质量的技术，可以帮助我们朝更多元化、包容性的客户体验继续前进。」</p><h2 id="IKEA释出全新「OMSESIDIG」系列首波设计"><a href="#IKEA释出全新「OMSESIDIG」系列首波设计" class="headerlink" title="IKEA释出全新「ÖMSESIDIG」系列首波设计"></a>IKEA释出全新「ÖMSESIDIG」系列首波设计</h2><p><img src="/img/post_img/fashion-23-14_5.png" alt="向拉丁美洲的文化、工艺和表达风格致敬"><br>&emsp;&emsp;IKEA 推出全新「ÖMSESIDIG 欧塞斯迪」系列，汇集了九位拉美地区，不同领域的创意新秀，一同探索当地独具一格的文化节日和生活方式。系列借助当地创意家的设计向拉丁美洲的文化、工艺和表达风格致敬。系列名称「ÖMSESIDIG」在瑞典语中的意思是「相互间」，蕴含了怀揣着好奇心来互相学习、共同创造的理念。首批发布的产品包括家用装饰物、时尚的灯罩和音箱面板，突出了该系列的生机与活力感，以及拉丁美洲围绕美食和音乐进行社交的文化传统。<br>&emsp;&emsp;据悉该系列包含 30 款产品，并将于 4 月开始陆续发售。 </p><h2 id="Carhartt-WIP-x-Awake-NY-2023春夏联名胶囊系列正式发布"><a href="#Carhartt-WIP-x-Awake-NY-2023春夏联名胶囊系列正式发布" class="headerlink" title="Carhartt WIP x Awake NY 2023春夏联名胶囊系列正式发布"></a>Carhartt WIP x Awake NY 2023春夏联名胶囊系列正式发布</h2><p><img src="/img/post_img/fashion-23-14_6.png" alt="嘻哈传奇人物Rakim出镜Lookbook拍摄"><br>&emsp;&emsp;Awake NY 和 Carhartt WIP 这对伙伴在去年 6 月携手 Patta 展开三方合作后，今回再次重聚发布 2023 春夏胶囊系列，庆祝品牌友谊一路走来。该系列 8 款单品中融合了 Carhartt WIP 的户外风格及功能主义设计，并以 Awake NY 代表性印花和醒目刺绣贯穿其中，透过浓厚的美式街头氛围呈现 Dearborn 帆布材质的 OG Active 夹克、棒球校队外套、T-shirt、连帽衫、工装裤、针织款式等，最后更邀请到嘻哈传奇人物 Rakim 着用出镜 Lookbook 拍摄。<br>&emsp;&emsp;上述系列将于 4 月 6 日通过 Carhartt WIP 和 Awake NY 在线商店和指定门店，以及全球零售商发售。</p><p>更多潮流资讯请访问<a href="https://hypebeast.com/">HYPEBEAST</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>潮流</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>饮食</tag>
+      
+      <tag>球鞋</tag>
+      
+      <tag>时装</tag>
+      
+      <tag>科技</tag>
+      
+      <tag>设计</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>博客搭建报告</title>
     <link href="/2023/03/30/blog-report/"/>
     <url>/2023/03/30/blog-report/</url>
     
-    <content type="html"><![CDATA[<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h2><p>&emsp;&emsp;我在22年上半年曾经部署过一次个人博客，用的是Hexo默认主题，而且连内容也没修改过。当时消磨我三分钟热度的最大原因是网络，不<del>科学上网</del>的话顺利同步到GitHub仓库纯看脸，外加本科期间没怎么用过GitHub（虽然现在也只会基操），因而半途而废了。后来转战csdn和博客园，想记录一些前后端开发经验以及论文随笔，但嫌上传图片麻烦以及不熟悉用$\LaTeX$码公式，最后也不了了之。<strong>得益于开源课的契机</strong>，让我再一次部署博客，按照教程和官方文档的指引，整个部署流程比较顺利。为便于自己后续维护或创建新博客，下一节记录了搭建全流程。</p><h2 id="1-搭建博客流程"><a href="#1-搭建博客流程" class="headerlink" title="1.搭建博客流程"></a>1.搭建博客流程</h2><p>搭建流程参考了<a href="https://zhuanlan.zhihu.com/p/26625249">教程1</a>和<a href="https://blog.csdn.net/yaorongke/article/details/119089190">教程2</a>，亲测基本没有问题。</p><h3 id="1-1-安装Node-js"><a href="#1-1-安装Node-js" class="headerlink" title="1.1.安装Node.js"></a>1.1.安装Node.js</h3><p>Hexo基于<a href="https://nodejs.org/en">Node.js</a>，官网下载18.15.0版本的安装包，添加环境变量、修改全局包路径，在命令行中输入<code>node -v</code>检验是否安装成功。添加环境变量及修改全局包路径可<a href="https://blog.csdn.net/yaorongke/article/details/119084295">参考</a>。</p><h3 id="1-2-安装Hexo"><a href="#1-2-安装Hexo" class="headerlink" title="1.2.安装Hexo"></a>1.2.安装Hexo</h3><p>新建一个文件夹存放博客文件，以管理员身份在该目录下打开命令行，输入：  </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>安装完成后初始化博客，输入：  </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init hexo-blog</span><br><span class="line">cd hexo-blog</span><br><span class="line">npm instal</span><br></pre></td></tr></table></figure><p>上述三行命令初始化了名为hexo-blog的项目并在该目录下生成初始化文件，进入该目录，npm安装必要包。</p><h3 id="1-3-安装Fluid主题"><a href="#1-3-安装Fluid主题" class="headerlink" title="1.3.安装Fluid主题"></a>1.3.安装Fluid主题</h3><p>Hexo5.0.0版本以上，推荐通过npm直接安装，进入博客目录执行命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-theme-fluid</span><br></pre></td></tr></table></figure><p>然后在博客目录下创建<code>_config.fluid.yml</code>，将<a href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a>的内容复制进去。<br>修改博客目录中的<code>_config.yml</code>：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">theme: fluid  # 指定主题</span><br><span class="line">language: zh-CN  # 指定语言</span><br></pre></td></tr></table></figure><p>首次使用主题的「关于页」需要手动创建：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page about</span><br></pre></td></tr></table></figure><p>创建成功后修改<code>/source/about/index.md</code>，添加<code>layout</code>属性，修改后的文件示例如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标题</span><br><span class="line">layout: about</span><br><span class="line">---</span><br></pre></td></tr></table></figure><p>更新主题，在博客目录下执行命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update --save hexo-theme-fluid</span><br></pre></td></tr></table></figure><h3 id="1-4-创建仓库并部署"><a href="#1-4-创建仓库并部署" class="headerlink" title="1.4.创建仓库并部署"></a>1.4.创建仓库并部署</h3><p>在GitHub上创建一个仓库用于保存博客文件。注意仓库名必须是&lt;用户名&gt;.github.io。<br>为了上传博客文件，需要修改博客目录的<code>_config.yml</code>文件的deploy，设定<code>type</code>、<code>repo</code>、<code>branch</code>字段。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repo: https://github.com/用户名/用户名.github.io.git  # 注意末尾加.git</span><br><span class="line">    branch: main</span><br></pre></td></tr></table></figure><p>最后，回到命令行输入：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>此时代码已更新到仓库中，等待片刻在浏览器输入https://用户名.github.io/，即可访问一个Fluid主题初始化的个人博客。</p><h3 id="1-5-设计页面及撰写博客"><a href="#1-5-设计页面及撰写博客" class="headerlink" title="1.5.设计页面及撰写博客"></a>1.5.设计页面及撰写博客</h3><p>如何在默认博客的基础上自定义自己的内容，具体可以参照<a href="https://hexo.fluid-dev.com/docs/guide/">Fluid用户手册</a>。<br>常用的命令，例如新建一篇文章：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 文件名</span><br></pre></td></tr></table></figure><p>本地调试时，输入：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean  # 清空博客文件缓存</span><br><span class="line">hexo g  # 生成博客文件</span><br><span class="line">hexo s  # 在本地运行博客网页便于预览与调试，网址默认是http://localhost:4000/</span><br></pre></td></tr></table></figure><p>本地调试完毕后部署到仓库即可。</p><h2 id="2-博客主题及其选取原因"><a href="#2-博客主题及其选取原因" class="headerlink" title="2.博客主题及其选取原因"></a>2.博客主题及其选取原因</h2><p>我参考的两篇教程都提及了Fluid，访问Fluid官网提及的两个预览网站，<strong>简洁且不简陋</strong>符合我的审美，就决定是它了！<br>正如Fluid的自述，它是一款Material Design风格的Hexo博客主题，主打“简洁至上”、“丰富配置”、“充满活力”。</p><ul><li><strong>简洁至上</strong> 除了首页浮于背景图之上具有“打字机”效果的文字，页面其余部分不存在花里胡哨的动效，默认配色统一，菜单清晰明朗。</li><li><strong>丰富配置</strong> 一方面Fluid提供了丰富的“归档”、“分类”、“关于”等实用页面，另一方面通过修改配置文件的各种字段可以自定义样式。</li><li><strong>充满活力</strong> Fluid不仅在官网上提供完备的用户手册，作为一款开源框架，Fluid团队在Github上积极回应用户问题、版本更新迭代。</li></ul><h2 id="3-博客功能实现及其技术选择"><a href="#3-博客功能实现及其技术选择" class="headerlink" title="3.博客功能实现及其技术选择"></a>3.博客功能实现及其技术选择</h2><p>按照页面阐述功能实现。</p><ul><li><strong>首页</strong> 展示背景图和欢迎文字，下滑是文章列表，文章含封面图、标题、摘要、日期、类别和标签，点击后查看文章详情。</li><li><strong>归档</strong> 以时间线呈现所有文章，点击后查看文章详情。</li><li><strong>分类</strong> 展示所有分类，展开某一分类将显示该分类下的所有文章，点击后查看文章详情。</li><li><strong>标签</strong> 以词云的形式展示所有标签，标签大小取决于含有该标签的文件数量，点击标签后展示对应文章。</li><li><strong>关于</strong> 展示个人信息，提供联系方式等。</li><li><strong>搜索</strong> 在博客网站范围内搜索包含搜索内容的文章。</li><li><strong>配色</strong> 在白与黑两种配色模式间切换。</li></ul><p>涉及的技术及环境包括：Git Page, Git, Node.js, Hexo, Fluid, Markdown, Frontmatter……</p><h2 id="4-搭建过程中的问题及解决方法"><a href="#4-搭建过程中的问题及解决方法" class="headerlink" title="4.搭建过程中的问题及解决方法"></a>4.搭建过程中的问题及解决方法</h2><h3 id="4-1-关于图片命名与路径"><a href="#4-1-关于图片命名与路径" class="headerlink" title="4.1.关于图片命名与路径"></a>4.1.关于图片命名与路径</h3><p><strong>问题1</strong> 初次生成Fluid默认博客后，想将「关于页」的头像改成自选图片，找到默认头像的图片位于<code>博客目录/public/img/avatar.png</code>，于是删除该图片并用重命名后的自选图片替代。然而无论怎么重启hexo，页面上的头像依旧不变。并且，一旦执行<code>hexo clean</code>后，自选图片就会再次被默认图片替换掉。<br><strong>解决1</strong> 问题在于路径，<code>public</code>下的文件都是在执行<code>hexo g</code>后生成的，一旦生成后，无论怎么修改<code>public</code>下的内容，都不会在页面中体现。正确的做法是将图片存放在<code>博客目录/source</code>下，执行<code>hexo g</code>后，会把<code>source</code>下的文件与<code>public</code>合并，从而将自选图片（以及其他用户自行添加的文件）复制入<code>public</code>，并最终呈现在页面上。同时，<code>hexo clean</code>只会清理掉<code>public</code>下的文件，不会影响<code>source</code>下的文件，因此自选图片和自定义文件不会被替换或清理掉。<br><strong>问题2</strong> 尽管解决了问题1，但从页面上看「关于页」的头像依然是默认图片，不过文字已经按照我修改的发生了变化。查看<code>public</code>下的文件，修改后的文章内容被复制了，但自选图片却没有。<br><strong>解决2</strong> 问题在于自选图片和默认图片的文件名一致，导致<code>source</code>下的自选图片在执行<code>hexo g</code>后仍然无法被复制到<code>public</code>。因此修改自选图片的文件名，并且将<code>_config.fluid.yml</code>文件的<code>about</code>的<code>avatar</code>字段修改为自选图片文件名。再次生成，发现头像已被替换为自选图片。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h2><p>&emsp;&emsp;我在22年上半年曾经部署过一次个人博客，用的是Hexo默认主题，而且连内容也没修改过。当时消磨我三分钟热度的最大原因是网络，不<del>科学上网</del>的话顺利同步到GitHub仓库纯看脸，外加本科期间没怎么用过GitHub（虽然现在也只会基操），因而半途而废了。后来转战csdn和博客园，想记录一些前后端开发经验以及论文随笔，但嫌上传图片麻烦以及不熟悉用$\LaTeX$码公式，最后也不了了之。<strong>得益于开源课的契机</strong>，让我再一次部署博客，按照教程和官方文档的指引，整个部署流程比较顺利。为便于自己后续维护或创建新博客，下一节记录了搭建全流程。</p><h2 id="1-搭建博客流程"><a href="#1-搭建博客流程" class="headerlink" title="1.搭建博客流程"></a>1.搭建博客流程</h2><p>搭建流程参考了<a href="https://zhuanlan.zhihu.com/p/26625249">教程1</a>和<a href="https://blog.csdn.net/yaorongke/article/details/119089190">教程2</a>，亲测基本没有问题。</p><h3 id="1-1-安装Node-js"><a href="#1-1-安装Node-js" class="headerlink" title="1.1.安装Node.js"></a>1.1.安装Node.js</h3><p>Hexo基于<a href="https://nodejs.org/en">Node.js</a>，官网下载18.15.0版本的安装包，添加环境变量、修改全局包路径，在命令行中输入<code>node -v</code>检验是否安装成功。添加环境变量及修改全局包路径可<a href="https://blog.csdn.net/yaorongke/article/details/119084295">参考</a>。</p><h3 id="1-2-安装Hexo"><a href="#1-2-安装Hexo" class="headerlink" title="1.2.安装Hexo"></a>1.2.安装Hexo</h3><p>新建一个文件夹存放博客文件，以管理员身份在该目录下打开命令行，输入：  </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>安装完成后初始化博客，输入：  </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init hexo-blog</span><br><span class="line">cd hexo-blog</span><br><span class="line">npm instal</span><br></pre></td></tr></table></figure><p>上述三行命令初始化了名为hexo-blog的项目并在该目录下生成初始化文件，进入该目录，npm安装必要包。</p><h3 id="1-3-安装Fluid主题"><a href="#1-3-安装Fluid主题" class="headerlink" title="1.3.安装Fluid主题"></a>1.3.安装Fluid主题</h3><p>Hexo5.0.0版本以上，推荐通过npm直接安装，进入博客目录执行命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-theme-fluid</span><br></pre></td></tr></table></figure><p>然后在博客目录下创建<code>_config.fluid.yml</code>，将<a href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a>的内容复制进去。<br>修改博客目录中的<code>_config.yml</code>：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">theme: fluid  # 指定主题</span><br><span class="line">language: zh-CN  # 指定语言</span><br></pre></td></tr></table></figure><p>首次使用主题的「关于页」需要手动创建：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page about</span><br></pre></td></tr></table></figure><p>创建成功后修改<code>/source/about/index.md</code>，添加<code>layout</code>属性，修改后的文件示例如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标题</span><br><span class="line">layout: about</span><br><span class="line">---</span><br></pre></td></tr></table></figure><p>更新主题，在博客目录下执行命令：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update --save hexo-theme-fluid</span><br></pre></td></tr></table></figure><h3 id="1-4-创建仓库并部署"><a href="#1-4-创建仓库并部署" class="headerlink" title="1.4.创建仓库并部署"></a>1.4.创建仓库并部署</h3><p>在GitHub上创建一个仓库用于保存博客文件。注意仓库名必须是&lt;用户名&gt;.github.io。<br>为了上传博客文件，需要修改博客目录的<code>_config.yml</code>文件的deploy，设定<code>type</code>、<code>repo</code>、<code>branch</code>字段。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repo: https://github.com/用户名/用户名.github.io.git  # 注意末尾加.git</span><br><span class="line">    branch: main</span><br></pre></td></tr></table></figure><p>最后，回到命令行输入：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>此时代码已更新到仓库中，等待片刻在浏览器输入https://用户名.github.io/，即可访问一个Fluid主题初始化的个人博客。</p><h3 id="1-5-设计页面及撰写博客"><a href="#1-5-设计页面及撰写博客" class="headerlink" title="1.5.设计页面及撰写博客"></a>1.5.设计页面及撰写博客</h3><p>如何在默认博客的基础上自定义自己的内容，具体可以参照<a href="https://hexo.fluid-dev.com/docs/guide/">Fluid用户手册</a>。<br>常用的命令，例如新建一篇文章：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 文件名</span><br></pre></td></tr></table></figure><p>本地调试时，输入：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean  # 清空博客文件缓存</span><br><span class="line">hexo g  # 生成博客文件</span><br><span class="line">hexo s  # 在本地运行博客网页便于预览与调试，网址默认是http://localhost:4000/</span><br></pre></td></tr></table></figure><p>本地调试完毕后部署到仓库即可。</p><h2 id="2-博客主题及其选取原因"><a href="#2-博客主题及其选取原因" class="headerlink" title="2.博客主题及其选取原因"></a>2.博客主题及其选取原因</h2><p>我参考的两篇教程都提及了<a href="https://hexo.fluid-dev.com/docs/">Fluid</a>，访问Fluid官网提及的两个预览网站，<strong>简洁且不简陋</strong>符合我的审美，就决定是它了！<br>正如Fluid的自述，它是一款Material Design风格的Hexo博客主题，主打“简洁至上”、“丰富配置”、“充满活力”。</p><ul><li><strong>简洁至上</strong> 除了首页浮于背景图之上具有“打字机”效果的文字，页面其余部分不存在花里胡哨的动效，默认配色统一，菜单清晰明朗。</li><li><strong>丰富配置</strong> 一方面Fluid提供了丰富的“归档”、“分类”、“关于”等实用页面，另一方面通过修改配置文件的各种字段可以自定义样式。</li><li><strong>充满活力</strong> Fluid不仅在官网上提供完备的用户手册，作为一款开源框架，Fluid团队在Github上积极回应用户问题、版本更新迭代。</li></ul><h2 id="3-博客功能实现及其技术选择"><a href="#3-博客功能实现及其技术选择" class="headerlink" title="3.博客功能实现及其技术选择"></a>3.博客功能实现及其技术选择</h2><p>按照页面阐述功能实现。</p><ul><li><strong>首页</strong> 展示背景图和欢迎文字，下滑是文章列表，文章含封面图、标题、摘要、日期、类别和标签，点击后查看文章详情。</li><li><strong>归档</strong> 以时间线呈现所有文章，点击后查看文章详情。</li><li><strong>分类</strong> 展示所有分类，展开某一分类将显示该分类下的所有文章，点击后查看文章详情。</li><li><strong>标签</strong> 以词云的形式展示所有标签，标签大小取决于含有该标签的文件数量，点击标签后展示对应文章。</li><li><strong>关于</strong> 展示个人信息，提供联系方式等。</li><li><strong>搜索</strong> 在博客网站范围内搜索包含搜索内容的文章。</li><li><strong>配色</strong> 在白与黑两种配色模式间切换。</li></ul><p>涉及的技术及环境包括：Git Page, Git, Node.js, Hexo, Fluid, Markdown, Frontmatter……</p><h2 id="4-搭建过程中的问题及解决方法"><a href="#4-搭建过程中的问题及解决方法" class="headerlink" title="4.搭建过程中的问题及解决方法"></a>4.搭建过程中的问题及解决方法</h2><h3 id="4-1-关于图片命名与路径"><a href="#4-1-关于图片命名与路径" class="headerlink" title="4.1.关于图片命名与路径"></a>4.1.关于图片命名与路径</h3><p><strong>问题1</strong> 初次生成Fluid默认博客后，想将「关于页」的头像改成自选图片，找到默认头像的图片位于<code>博客目录/public/img/avatar.png</code>，于是删除该图片并用重命名后的自选图片替代。然而无论怎么重启hexo，页面上的头像依旧不变。并且，一旦执行<code>hexo clean</code>后，自选图片就会再次被默认图片替换掉。</p><p><strong>解决1</strong> 问题在于路径，<code>public</code>下的文件都是在执行<code>hexo g</code>后生成的，一旦生成后，无论怎么修改<code>public</code>下的内容，都不会在页面中体现。正确的做法是将图片存放在<code>博客目录/source</code>下，执行<code>hexo g</code>后，会把<code>source</code>下的文件与<code>public</code>合并，从而将自选图片（以及用户自行添加的其他文件）复制入<code>public</code>，并最终呈现在页面上。同时，<code>hexo clean</code>只会清理掉<code>public</code>下的文件，不会影响<code>source</code>下的文件，因此自选图片和自定义文件不会被替换或清理掉。</p><p><strong>问题2</strong> 尽管解决了问题1，但从页面上看「关于页」的头像依然是默认图片，不过文字已经按照我修改的发生了变化。查看<code>public</code>下的文件，修改后的文章内容被复制了，但自选图片却没有。</p><p><strong>解决2</strong> 问题在于自选图片和默认图片的文件名一致，导致<code>source</code>下的自选图片在执行<code>hexo g</code>后仍然无法被复制到<code>public</code>。因此修改自选图片的文件名，并且将<code>_config.fluid.yml</code>文件的<code>about</code>的<code>avatar</code>字段修改为自选图片文件名。再次生成，发现头像已被替换为自选图片。</p><h3 id="4-2-关于无法加载LaTeX文本"><a href="#4-2-关于无法加载LaTeX文本" class="headerlink" title="4.2.关于无法加载LaTeX文本"></a>4.2.关于无法加载LaTeX文本</h3><p><strong>问题</strong> Markdown支持LaTeX，但实测后发现无法渲染。<br><strong>解决</strong> 在Fluid用户手册上找到了解决办法，Fluid默认关闭渲染LaTeX功能，需要在<code>_config.fluid.yml</code>文件中设置<code>math</code>字段为<code>true</code>。官方提到，<code>math</code>下的<code>specific</code>建议设为<code>true</code>，这样只有在文章Frontmatter里指定<code>math: true</code>才会在文章页启动公式转换，以便在页面不包含公式时提高加载速度。</p>]]></content>
     
     
     <categories>
@@ -20,7 +140,7 @@
     
     <tags>
       
-      <tag>其他</tag>
+      <tag>Git Page</tag>
       
     </tags>
     

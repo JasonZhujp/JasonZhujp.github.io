@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="JasonZhu&#39;s Blog">
 <meta property="og:description" content="作业：部署一个静态网页博客。静态网页博客是一种不需要后端服务器和数据库支持的网站，只需要使用HTML、CSS和JavaScript等前端技术就可以实现。静态网页博客有很多优点，比如速度快、安全稳定、易于维护等。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://jasonzhujp.github.io/img/post_img/blog-report_index.png">
+<meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/blog-report_index.png">
 <meta property="article:published_time" content="2023-03-30T08:48:45.000Z">
-<meta property="article:modified_time" content="2023-03-30T13:56:18.905Z">
+<meta property="article:modified_time" content="2023-03-31T07:16:49.643Z">
 <meta property="article:author" content="Jason Zhu">
-<meta property="article:tag" content="其他">
+<meta property="article:tag" content="Git Page">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://jasonzhujp.github.io/img/post_img/blog-report_index.png">
+<meta name="twitter:image" content="https://jasonzhujp.github.io/img/index_img/blog-report_index.png">
   
   
   
@@ -188,7 +188,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/post_img/blog-report_banner.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -217,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          2.9k 字
         
       </span>
     
@@ -228,7 +228,7 @@
         
         
         
-          23 分钟
+          15 分钟
         
       </span>
     
@@ -299,7 +299,7 @@
 <p>本地调试时，输入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean  # 清空博客文件缓存</span><br><span class="line">hexo g  # 生成博客文件</span><br><span class="line">hexo s  # 在本地运行博客网页便于预览与调试，网址默认是http://localhost:4000/</span><br></pre></td></tr></table></figure>
 <p>本地调试完毕后部署到仓库即可。</p>
-<h2 id="2-博客主题及其选取原因"><a href="#2-博客主题及其选取原因" class="headerlink" title="2.博客主题及其选取原因"></a>2.博客主题及其选取原因</h2><p>我参考的两篇教程都提及了Fluid，访问Fluid官网提及的两个预览网站，<strong>简洁且不简陋</strong>符合我的审美，就决定是它了！<br>正如Fluid的自述，它是一款Material Design风格的Hexo博客主题，主打“简洁至上”、“丰富配置”、“充满活力”。</p>
+<h2 id="2-博客主题及其选取原因"><a href="#2-博客主题及其选取原因" class="headerlink" title="2.博客主题及其选取原因"></a>2.博客主题及其选取原因</h2><p>我参考的两篇教程都提及了<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/">Fluid</a>，访问Fluid官网提及的两个预览网站，<strong>简洁且不简陋</strong>符合我的审美，就决定是它了！<br>正如Fluid的自述，它是一款Material Design风格的Hexo博客主题，主打“简洁至上”、“丰富配置”、“充满活力”。</p>
 <ul>
 <li><strong>简洁至上</strong> 除了首页浮于背景图之上具有“打字机”效果的文字，页面其余部分不存在花里胡哨的动效，默认配色统一，菜单清晰明朗。</li>
 <li><strong>丰富配置</strong> 一方面Fluid提供了丰富的“归档”、“分类”、“关于”等实用页面，另一方面通过修改配置文件的各种字段可以自定义样式。</li>
@@ -316,7 +316,11 @@
 <li><strong>配色</strong> 在白与黑两种配色模式间切换。</li>
 </ul>
 <p>涉及的技术及环境包括：Git Page, Git, Node.js, Hexo, Fluid, Markdown, Frontmatter……</p>
-<h2 id="4-搭建过程中的问题及解决方法"><a href="#4-搭建过程中的问题及解决方法" class="headerlink" title="4.搭建过程中的问题及解决方法"></a>4.搭建过程中的问题及解决方法</h2><h3 id="4-1-关于图片命名与路径"><a href="#4-1-关于图片命名与路径" class="headerlink" title="4.1.关于图片命名与路径"></a>4.1.关于图片命名与路径</h3><p><strong>问题1</strong> 初次生成Fluid默认博客后，想将「关于页」的头像改成自选图片，找到默认头像的图片位于<code>博客目录/public/img/avatar.png</code>，于是删除该图片并用重命名后的自选图片替代。然而无论怎么重启hexo，页面上的头像依旧不变。并且，一旦执行<code>hexo clean</code>后，自选图片就会再次被默认图片替换掉。<br><strong>解决1</strong> 问题在于路径，<code>public</code>下的文件都是在执行<code>hexo g</code>后生成的，一旦生成后，无论怎么修改<code>public</code>下的内容，都不会在页面中体现。正确的做法是将图片存放在<code>博客目录/source</code>下，执行<code>hexo g</code>后，会把<code>source</code>下的文件与<code>public</code>合并，从而将自选图片（以及其他用户自行添加的文件）复制入<code>public</code>，并最终呈现在页面上。同时，<code>hexo clean</code>只会清理掉<code>public</code>下的文件，不会影响<code>source</code>下的文件，因此自选图片和自定义文件不会被替换或清理掉。<br><strong>问题2</strong> 尽管解决了问题1，但从页面上看「关于页」的头像依然是默认图片，不过文字已经按照我修改的发生了变化。查看<code>public</code>下的文件，修改后的文章内容被复制了，但自选图片却没有。<br><strong>解决2</strong> 问题在于自选图片和默认图片的文件名一致，导致<code>source</code>下的自选图片在执行<code>hexo g</code>后仍然无法被复制到<code>public</code>。因此修改自选图片的文件名，并且将<code>_config.fluid.yml</code>文件的<code>about</code>的<code>avatar</code>字段修改为自选图片文件名。再次生成，发现头像已被替换为自选图片。</p>
+<h2 id="4-搭建过程中的问题及解决方法"><a href="#4-搭建过程中的问题及解决方法" class="headerlink" title="4.搭建过程中的问题及解决方法"></a>4.搭建过程中的问题及解决方法</h2><h3 id="4-1-关于图片命名与路径"><a href="#4-1-关于图片命名与路径" class="headerlink" title="4.1.关于图片命名与路径"></a>4.1.关于图片命名与路径</h3><p><strong>问题1</strong> 初次生成Fluid默认博客后，想将「关于页」的头像改成自选图片，找到默认头像的图片位于<code>博客目录/public/img/avatar.png</code>，于是删除该图片并用重命名后的自选图片替代。然而无论怎么重启hexo，页面上的头像依旧不变。并且，一旦执行<code>hexo clean</code>后，自选图片就会再次被默认图片替换掉。</p>
+<p><strong>解决1</strong> 问题在于路径，<code>public</code>下的文件都是在执行<code>hexo g</code>后生成的，一旦生成后，无论怎么修改<code>public</code>下的内容，都不会在页面中体现。正确的做法是将图片存放在<code>博客目录/source</code>下，执行<code>hexo g</code>后，会把<code>source</code>下的文件与<code>public</code>合并，从而将自选图片（以及用户自行添加的其他文件）复制入<code>public</code>，并最终呈现在页面上。同时，<code>hexo clean</code>只会清理掉<code>public</code>下的文件，不会影响<code>source</code>下的文件，因此自选图片和自定义文件不会被替换或清理掉。</p>
+<p><strong>问题2</strong> 尽管解决了问题1，但从页面上看「关于页」的头像依然是默认图片，不过文字已经按照我修改的发生了变化。查看<code>public</code>下的文件，修改后的文章内容被复制了，但自选图片却没有。</p>
+<p><strong>解决2</strong> 问题在于自选图片和默认图片的文件名一致，导致<code>source</code>下的自选图片在执行<code>hexo g</code>后仍然无法被复制到<code>public</code>。因此修改自选图片的文件名，并且将<code>_config.fluid.yml</code>文件的<code>about</code>的<code>avatar</code>字段修改为自选图片文件名。再次生成，发现头像已被替换为自选图片。</p>
+<h3 id="4-2-关于无法加载LaTeX文本"><a href="#4-2-关于无法加载LaTeX文本" class="headerlink" title="4.2.关于无法加载LaTeX文本"></a>4.2.关于无法加载LaTeX文本</h3><p><strong>问题</strong> Markdown支持LaTeX，但实测后发现无法渲染。<br><strong>解决</strong> 在Fluid用户手册上找到了解决办法，Fluid默认关闭渲染LaTeX功能，需要在<code>_config.fluid.yml</code>文件中设置<code>math</code>字段为<code>true</code>。官方提到，<code>math</code>下的<code>specific</code>建议设为<code>true</code>，这样只有在文章Frontmatter里指定<code>math: true</code>才会在文章页启动公式转换，以便在页面不包含公式时提高加载速度。</p>
 
                 
               </div>
@@ -350,7 +354,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%85%B6%E4%BB%96/">#其他</a>
+        <a href="/tags/Git-Page/">#Git Page</a>
       
     </div>
   
@@ -406,6 +410,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/03/31/fashion-23-14/" title="【潮流资讯】23年第14周">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【潮流资讯】23年第14周</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
