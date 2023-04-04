@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-offline-rl-03_index.png">
 <meta property="article:published_time" content="2023-03-31T07:29:17.000Z">
-<meta property="article:modified_time" content="2023-03-31T13:09:02.282Z">
+<meta property="article:modified_time" content="2023-04-04T01:55:35.441Z">
 <meta property="article:author" content="Jason Zhu">
 <meta property="article:tag" content="RL">
 <meta property="article:tag" content="Offline">
@@ -190,7 +190,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/post_img/paper-offline-rl-03_banner.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/post_img/paper-offline-rl-03/paper-offline-rl-03_banner.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          54 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          7 分钟
+          1 分钟
         
       </span>
     
@@ -276,27 +276,7 @@
                 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2102.08363">COMBO: Conservative Offline Model-Based Policy Optimization</a>  </p>
 </blockquote>
-<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>Trains conservative value function estimate using both offline data and regularized OOD rollouts under the model <strong>without requiring explicit uncertainty estimation</strong> (which is required by MOReL and MOPO) by <strong>penalizing</strong> Q-values that is more likely to be out-of-support while <strong>pushing up</strong> Q-values that are trustworthy. COMBO attains greater performance on problems that demand <strong>generalization</strong>.</p>
-<h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ul>
-<li>Optimize a lower-bound on the expected return of learned policy.</li>
-<li>Guarantees policy improvement beyond behavior policy.</li>
-</ul>
-<h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><p><img src="/img/post_img/paper-offline-rl-03_1.png" srcset="/img/loading.gif" lazyload></p>
-<ol>
-<li>Train dynamics model on offline data using a nueral network to produce the next state and reward.</li>
-<li>Collect model rollouts data by sampling from rollout distribution and dynamics model.</li>
-<li>Conservatively evaluate learned policy by penalizing and pushing up corresponding Q-values using samples from both offline data and model data.</li>
-<li>Improve policy under state marginal of an f-interpolation between offline data and model data.</li>
-</ol>
-<h2 id="Env-amp-Baseline"><a href="#Env-amp-Baseline" class="headerlink" title="Env &amp; Baseline"></a>Env &amp; Baseline</h2><p>Self-designed env, DeepMind Control suite, D4RL<br>BEAR, BRAC, CQL, MOPO, MOReL, offline SAC, BC</p>
-<h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ul>
-<li>MOPO, MOReL, CQL [self-designed env like used in MOPO] $\to$ generalization<ul>
-<li>Uncertainty estimation is challenging</li>
-</ul>
-</li>
-<li>LOMPO, LMBPO, SLAC-Off, CAL [DeepMind Control suite] $\to$ performance on image-based tasks</li>
-<li>BC, MOPO, MOReL, CQL, SAC-Off, BEAR, BRAC-p, BRAC-v [D4RL] $\to$ performance on standard D4RL tasks</li>
-</ul>
+<p><img src="/img/post_img/paper-offline-rl-03/paper-offline-rl-03_1.jpg" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-03/paper-offline-rl-03_2.jpg" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-03/paper-offline-rl-03_3.jpg" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-03/paper-offline-rl-03_4.jpg" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-03/paper-offline-rl-03_5.jpg" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-03/paper-offline-rl-03_6.jpg" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-03/paper-offline-rl-03_7.jpg" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -391,6 +371,12 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/04/04/paper-offline-rl-04/" title="【论文随笔】Combustion Optimization for Thermal Power Generating">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【论文随笔】Combustion Optimization for Thermal Power Generating</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
@@ -450,12 +436,6 @@
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -649,49 +629,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
