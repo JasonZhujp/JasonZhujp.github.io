@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/coding-d4rl-install_index.png">
 <meta property="article:published_time" content="2023-04-06T09:28:03.000Z">
-<meta property="article:modified_time" content="2023-04-07T05:15:09.749Z">
+<meta property="article:modified_time" content="2023-04-07T13:46:10.387Z">
 <meta property="article:author" content="Jason Zhu">
 <meta property="article:tag" content="RL">
 <meta property="article:tag" content="Offline">
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.8k 字
+          4k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          20 分钟
+          21 分钟
         
       </span>
     
@@ -329,7 +329,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec remove xxx   # 解绑kernel</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-安装mujoco210"><a href="#3-安装mujoco210" class="headerlink" title="3.安装mujoco210"></a>3.安装mujoco210</h2><p>在Mujoco的Github<a target="_blank" rel="noopener" href="https://github.com/deepmind/mujoco/releases/tag/2.1.0">仓库</a>中下载mujoco210-linux-x86_64.tar.gz，然后重命名、解压如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/下载   # 进入压缩包所在目录</span><br><span class="line">mv mujoco210-linux-x86_64.tar.gz mujoco210   # 重命名</span><br><span class="line">tar -zxvf mujoco210-linux-x86_64.tar.gz   # 解压</span><br><span class="line">mkdir ~/.mujoco   # 在home下新建文件夹</span><br><span class="line">cp -r mujoco210 ~/.mujoco   # 将解压后的文件复制过去</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~/下载   # 进入压缩包所在目录</span><br><span class="line">mv mujoco210-linux-x86_64.tar.gz mujoco210   # 重命名</span><br><span class="line">tar -zxvf mujoco210-linux-x86_64.tar.gz   # 解压</span><br><span class="line">mkdir ~/.mujoco   # 新建文件夹</span><br><span class="line">cp -r mujoco210 ~/.mujoco   # 将解压后的文件复制过去</span><br></pre></td></tr></table></figure>
 <p>添加环境变量如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc   # 打开设置文件</span><br><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.mujoco/mujoco210/bin</span><br><span class="line">export MUJOCO_KEY_PATH=~/.mujoco$&#123;MUJOCO_KEY_PATH&#125;</span><br><span class="line">source ~/.bashrc   # 执行更新</span><br></pre></td></tr></table></figure>
 <p>测试是否安装正确，弹出mujoco GUI，初始化了一个木偶人：</p>
@@ -355,15 +355,22 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh git@github.com   # 测试能否连通 出现Successfully即可</span><br></pre></td></tr></table></figure>
 <h3 id="6-2-克隆仓库"><a href="#6-2-克隆仓库" class="headerlink" title="6.2.克隆仓库"></a>6.2.克隆仓库</h3><p>现在可以clone d4rl仓库了，进入<strong>存放git文件</strong>的自定义目录下，执行clone命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/rail-berkeley/d4rl.git</span><br></pre></td></tr></table></figure>
-<p>网络不好可以多试几次（虚拟机暂时不能像本机一样<del>科学上网</del>），找到d4rl目录下的setup.py文件，注释掉<code>install_requires</code>下的mujoco_py和dm_control，因为前面我们以及自行安装完毕了。  </p>
-<p>最后，在<strong>conda环境下</strong>，且在<strong>存放git文件</strong>的自定义目录下，执行安装命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -e .   # 别漏掉&#x27;.&#x27;</span><br></pre></td></tr></table></figure>
+<p>网络不好可以多试几次（虚拟机<del>科学上网</del>也行），找到d4rl目录下的setup.py文件，注释掉<code>install_requires</code>下的mujoco_py和dm_control，因为前面我们已经自行安装完毕了。  </p>
+<p>最后，在<strong>conda环境下</strong>，且在<strong>clone的d4rl文件</strong>目录下，执行安装命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -e .</span><br></pre></td></tr></table></figure>
 
 <h2 id="7-测试验证"><a href="#7-测试验证" class="headerlink" title="7.测试验证"></a>7.测试验证</h2><p>进入jupyter notebook（其实在终端进入python环境也行），测试环境是否可用：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import gym</span><br><span class="line">import d4rl</span><br><span class="line"></span><br><span class="line">env = gym.make(&#x27;maze2d-umaze-v1&#x27;)</span><br><span class="line">env.reset()</span><br><span class="line">env.step(env.action_space.sample())</span><br><span class="line">&gt;&gt;&gt; Out[x]: (array([ 2.9686984 ,  0.91059711,  0.01391173, -0.3282065 ]), 0.0, False, &#123;&#125;)</span><br><span class="line"></span><br><span class="line">dataset = env.get_dataset()</span><br><span class="line">print(dataset[&#x27;observations&#x27;])</span><br><span class="line">&gt;&gt;&gt; Out[x]: Downloading dataset: http://rail.eecs.berkeley.edu/datasets/offline_rl/maze2d/maze2d-umaze-sparse-v1.hdf5 to /home/jason/.d4rl/datasets/maze2d-umaze-sparse-v1.hdf5</span><br><span class="line">load datafile: 100%|██████████| 8/8 [00:00&lt;00:00, 28.63it/s]</span><br><span class="line">[[ 1.0856489   1.9745734   0.00981035  0.02174424]</span><br><span class="line"> [ 1.0843927   1.97413    -0.12562364 -0.04433781]</span><br><span class="line"> [ 1.0807577   1.9752754  -0.3634883   0.11453988]</span><br><span class="line"> ...</span><br><span class="line"> [ 1.1328583   2.8062387  -4.484303    0.09555068]</span><br><span class="line"> [ 1.0883482   2.8068895  -4.4510083   0.06509537]</span><br><span class="line"> [ 1.0463258   2.8074222  -4.202244    0.05324839]]</span><br></pre></td></tr></table></figure>
 <div class="note note-success">
             <p><strong>大功告成！</strong></p>
           </div>
+
+<h2 id="8-其他操作"><a href="#8-其他操作" class="headerlink" title="8.其他操作"></a>8.其他操作</h2><p>为避免“纯净”的d4rl_env被误操作污染，复制一份pure_d4rl虚拟环境。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n pure_d4rl --clone d4rl_env</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>若环境配坏了，需删除conda环境。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove -n xxx --all</span><br></pre></td></tr></table></figure>
+<p>配置mjrl环境时对mujoc_py的版本要求在2.0到2.1之间，下面的版本亲测有效：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mujoco_py==2.0.2.8</span><br></pre></td></tr></table></figure>
                 
               </div>
             
