@@ -16,26 +16,25 @@
   <meta name="author" content="Jason Zhu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Model-based Offline Policy Optimization | NeurIPS 2020">
+    <meta name="description" content="Soft Actor-Critic:Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor | ICML 2018">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【论文随笔】MOPO">
-<meta property="og:url" content="https://jasonzhujp.github.io/2023/03/31/paper-offline-rl-01/index.html">
+<meta property="og:title" content="【论文随笔】SAC">
+<meta property="og:url" content="https://jasonzhujp.github.io/2023/04/10/paper-rl-06/index.html">
 <meta property="og:site_name" content="JasonZhu&#39;s Blog">
-<meta property="og:description" content="Model-based Offline Policy Optimization | NeurIPS 2020">
+<meta property="og:description" content="Soft Actor-Critic:Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor | ICML 2018">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-offline-rl-01_index.png">
-<meta property="article:published_time" content="2023-03-31T06:31:15.000Z">
-<meta property="article:modified_time" content="2023-04-04T02:06:12.977Z">
+<meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-06_index.png">
+<meta property="article:published_time" content="2023-04-10T09:21:24.000Z">
+<meta property="article:modified_time" content="2023-04-10T12:05:12.649Z">
 <meta property="article:author" content="Jason Zhu">
 <meta property="article:tag" content="RL">
-<meta property="article:tag" content="Offline">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://jasonzhujp.github.io/img/index_img/paper-offline-rl-01_index.png">
+<meta name="twitter:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-06_index.png">
   
   
   
-  <title>【论文随笔】MOPO - JasonZhu&#39;s Blog</title>
+  <title>【论文随笔】SAC - JasonZhu&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,13 +189,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/post_img/paper-offline-rl-01/paper-offline-rl-01_banner.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/post_img/paper-rl-06/paper-rl-06_banner.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【论文随笔】MOPO"></span>
+            <span id="subtitle" data-typed-text="【论文随笔】SAC"></span>
           
         </div>
 
@@ -207,8 +206,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-31 14:31" pubdate>
-          2023年3月31日 下午
+        <time datetime="2023-04-10 17:21" pubdate>
+          2023年4月10日 下午
         </time>
       </span>
     
@@ -219,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          41 字
+          1.3k 字
         
       </span>
     
@@ -230,7 +229,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -268,15 +267,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【论文随笔】MOPO</h1>
+            <h1 style="display: none">【论文随笔】SAC</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.13239">MOPO: Model-based Offline Policy Optimization</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1801.01290">Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor</a></p>
 </blockquote>
-<p><img src="/img/post_img/paper-offline-rl-01/paper-offline-rl-01_1.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-01/paper-offline-rl-01_2.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-01/paper-offline-rl-01_3.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-01/paper-offline-rl-01_4.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-01/paper-offline-rl-01_5.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-01/paper-offline-rl-01_6.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-offline-rl-01/paper-offline-rl-01_7.JPG" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>Model-free methods typically suffer from very high sample complexity and brittle convergence properties. SAC is an <strong>off-policy maximum entropy</strong>, <strong>stochastic actor-critic</strong> algorithm that <strong>encourages exploration</strong> and provides for both <strong>sample efficiency</strong> and <strong>learning stability</strong>.<br><img src="/img/post_img/paper-rl-06/paper-rl-06_01.png" srcset="/img/loading.gif" lazyload  style="zoom: 80%;" /></p>
+<h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><p>Present a convergence proof for policy iteration (policy evaluation and policy improvement) in the maximum entropy framework. </p>
+<h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><p>An actor-critic framework consist of target and current soft value networks $V_{\psi}\left(s_{t}\right)$ and $V_{\bar{\psi}}\left(s_{t}\right)$ , double Q value networks $Q_{\theta_{1,2}}\left(s_{t},a_{t}\right)$ and an actor network $\pi_{\phi}\left(a_{t}\mid s_{t}\right)$.<br><img src="/img/post_img/paper-rl-06/paper-rl-06_02.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>Gym, Humanoid(rllab) [continuous tasks]<br>DDPG, PPO, SQL, TD3, Trust-PCL</p>
+<h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ol>
+<li>Comparative Evaluation with DDPG, PPO, SQL, TD3(Gym, Humanoid rllab)</li>
+<li>Ablation Study<ul>
+<li>Stochastic vs deterministic policy (remove entropy) [Humanoid rllab] $\to$ Stochasticity can stabilize training.</li>
+<li>Policy evaluation [Gym Ant-v1] $\to$ Deterministic evaluation can yield better performance.</li>
+<li>Reward scale hyperparameter [Gym Ant-v1] $\to$ With the right reward scaling, the model balances exploration and exploitation, leading to faster learning and better asymptotic performance.</li>
+<li>Target network update [Gym Ant-v1] $\to$ Large $\tau$ can lead to instabilities while small $\tau$ can make training slower.</li>
+</ul>
+</li>
+</ol>
 
                 
               </div>
@@ -312,8 +324,6 @@
       
         <a href="/tags/RL/">#RL</a>
       
-        <a href="/tags/Offline/">#Offline</a>
-      
         <a href="/tags/Algorithm/">#Algorithm</a>
       
     </div>
@@ -326,8 +336,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【论文随笔】MOPO</div>
-      <div>https://jasonzhujp.github.io/2023/03/31/paper-offline-rl-01/</div>
+      <div>【论文随笔】SAC</div>
+      <div>https://jasonzhujp.github.io/2023/04/10/paper-rl-06/</div>
     </div>
     <div class="license-meta">
       
@@ -339,7 +349,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月31日</div>
+          <div>2023年4月10日</div>
         </div>
       
       
@@ -371,18 +381,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/31/paper-offline-rl-02/" title="【论文随笔】MOReL">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【论文随笔】MOReL</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/31/fashion-23-14/" title="【潮流资讯】23年第14周">
-                        <span class="hidden-mobile">【潮流资讯】23年第14周</span>
+                      <a href="/2023/04/06/coding-d4rl-install/" title="【代码】D4RL安装全流程">
+                        <span class="hidden-mobile">【代码】D4RL安装全流程</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -436,6 +440,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -629,6 +639,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

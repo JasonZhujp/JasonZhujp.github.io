@@ -16,26 +16,26 @@
   <meta name="author" content="Jason Zhu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="When to Trust Your Model:Model-Based Policy Optimization | NeurIPS 2019">
+    <meta name="description" content="Conservative Offline Model-Based Policy Optimization | NeurIPS 2021">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【论文随笔】MBPO">
-<meta property="og:url" content="https://jasonzhujp.github.io/2023/04/04/paper-offline-rl-05/index.html">
+<meta property="og:title" content="【论文随笔】COMBO">
+<meta property="og:url" content="https://jasonzhujp.github.io/2023/03/31/paper-rl-03/index.html">
 <meta property="og:site_name" content="JasonZhu&#39;s Blog">
-<meta property="og:description" content="When to Trust Your Model:Model-Based Policy Optimization | NeurIPS 2019">
+<meta property="og:description" content="Conservative Offline Model-Based Policy Optimization | NeurIPS 2021">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-offline-rl-05_index.png">
-<meta property="article:published_time" content="2023-04-04T11:13:30.000Z">
-<meta property="article:modified_time" content="2023-04-04T11:26:40.575Z">
+<meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-03_index.png">
+<meta property="article:published_time" content="2023-03-31T07:29:17.000Z">
+<meta property="article:modified_time" content="2023-04-10T09:15:41.205Z">
 <meta property="article:author" content="Jason Zhu">
 <meta property="article:tag" content="RL">
 <meta property="article:tag" content="Offline">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://jasonzhujp.github.io/img/index_img/paper-offline-rl-05_index.png">
+<meta name="twitter:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-03_index.png">
   
   
   
-  <title>【论文随笔】MBPO - JasonZhu&#39;s Blog</title>
+  <title>【论文随笔】COMBO - JasonZhu&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,13 +190,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/post_img/paper-offline-rl-05/paper-offline-rl-05_banner.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/post_img/paper-rl-03/paper-rl-03_banner.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【论文随笔】MBPO"></span>
+            <span id="subtitle" data-typed-text="【论文随笔】COMBO"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-04 19:13" pubdate>
-          2023年4月4日 晚上
+        <time datetime="2023-03-31 15:29" pubdate>
+          2023年3月31日 下午
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          54 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          6 分钟
+          1 分钟
         
       </span>
     
@@ -268,35 +268,15 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【论文随笔】MBPO</h1>
+            <h1 style="display: none">【论文随笔】COMBO</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1906.08253">When to Trust Your Model: Model-Based Policy Optimization</a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2102.08363">COMBO: Conservative Offline Model-Based Policy Optimization</a>  </p>
 </blockquote>
-<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>A <strong>large amount</strong> of <strong>short model-generated rollouts</strong> can allow a policy optimization algorithm to learn much <strong>faster</strong> while retaining the asymptotic performance of the most competitive model-free algorithms. </p>
-<h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><ol>
-<li><strong>Monotonic</strong> MBPO optimizes a policy under a learned model, collects data under the updated policy, and uses that data to train a new model.<br><img src="/img/post_img/paper-offline-rl-05/paper-offline-rl-05_1.png" srcset="/img/loading.gif" lazyload></li>
-<li>MBPO with <strong>Deep RL</strong><br><img src="/img/post_img/paper-offline-rl-05/paper-offline-rl-05_2.png" srcset="/img/loading.gif" lazyload>  </li>
-</ol>
-<h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ol>
-<li>Construct a bound (governed by sampling generalization error and distribution shift) that measures the gap between true returns and model returns, to show monotonic improvement for model-based method.</li>
-<li>Construct a bound for the scheme that begins a rollout from previous policy and switch to unrolling the trajectory under model and current policy for k steps.</li>
-<li>Build the relationship between model error and distribution shift error. Rectify the bound by incorporating approximated model error on the distribution of current policy.</li>
-</ol>
-<h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>SAC, PPO, PETS, STEVE, SLBO<br>MuJoCo continuous control tasks</p>
-<h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ol>
-<li>Compare to baselines [MuJoCo continuous control tasks] $\to$ Performance on standard tasks.</li>
-<li>Ablation study by comparing to SAC $\to$<ul>
-<li>Model is helpful.</li>
-<li>Short model-based rollouts can mitigate compounding model error.</li>
-<li><em>Value Expansion?</em> </li>
-<li>A policy trained on model trainsitions may not exploit the model if the rollouts are sufficiently short.</li>
-</ul>
-</li>
-</ol>
+<p><img src="/img/post_img/paper-rl-03/paper-rl-03_1.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-rl-03/paper-rl-03_2.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-rl-03/paper-rl-03_3.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-rl-03/paper-rl-03_4.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-rl-03/paper-rl-03_5.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-rl-03/paper-rl-03_6.JPG" srcset="/img/loading.gif" lazyload><br><img src="/img/post_img/paper-rl-03/paper-rl-03_7.JPG" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -346,8 +326,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【论文随笔】MBPO</div>
-      <div>https://jasonzhujp.github.io/2023/04/04/paper-offline-rl-05/</div>
+      <div>【论文随笔】COMBO</div>
+      <div>https://jasonzhujp.github.io/2023/03/31/paper-rl-03/</div>
     </div>
     <div class="license-meta">
       
@@ -359,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月4日</div>
+          <div>2023年3月31日</div>
         </div>
       
       
@@ -391,9 +371,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/06/coding-d4rl-install/" title="【代码】D4RL安装全流程">
+                      <a href="/2023/04/04/paper-rl-04/" title="【论文随笔】Combustion Optimization for Thermal Power Generating Units">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【代码】D4RL安装全流程</span>
+                        <span class="hidden-mobile">【论文随笔】Combustion Optimization for Thermal Power Generating Units</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -401,8 +381,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/04/paper-offline-rl-04/" title="【论文随笔】Combustion Optimization for Thermal Power Generating Units">
-                        <span class="hidden-mobile">【论文随笔】Combustion Optimization for Thermal Power Generating Units</span>
+                      <a href="/2023/03/31/paper-rl-02/" title="【论文随笔】MOReL">
+                        <span class="hidden-mobile">【论文随笔】MOReL</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -456,12 +436,6 @@
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -655,49 +629,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
