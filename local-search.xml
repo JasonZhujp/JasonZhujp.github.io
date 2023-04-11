@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>【论文随笔】EDAC</title>
+    <link href="/2023/04/11/paper-rl-07/"/>
+    <url>/2023/04/11/paper-rl-07/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://arxiv.org/abs/2110.01548">Uncertainty-Based Offline Reinforcement Learning with Diversified Q-Ensemble</a></p></blockquote><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><ul><li>Prior methods typically require <strong>accurate estimation of the behavior policy</strong> or <strong>sampling from OOD data points</strong>, which are hard. </li><li>Prior methods under-utilize the generalization ability and often fall into suboptimal solutions too close to the given dataset. (<strong>over conservative</strong>)</li></ul><h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>Propose an <strong>uncertainty-based</strong>, <strong>ensemble-diversified</strong> actor-critic offline RL method with <strong>clipped Q-learning</strong>, which invloves confidence of the Q-value prediction and does not require estimation or sampling of the data distribution.</p><h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><ul><li>Clipped Q-learning can be leveraged to successfully penalize OOD data points with high prediction uncertainties. The size of the penalty and the standard deviation are highly correlated.</li><li>It is useful to increase the number of Q-networks along with the clipped Q-learning for better performance.</li></ul><h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ul><li>Clipped Q-learning can be either interpreted as <strong>penalizing state-action pairs with high-variance Q-value estimates</strong>, or <strong>utilizing the lower-confidence bound of the Q-value predictions</strong>. Theoratically, using the clipped Q-value is similar to penalizing the ensemble mean of the Q-values with the standard deviation scaled by a coefficient dependent on N.</li><li>The <strong>alignment of the input gradients can induce insufficient penalization</strong> of near-distribution data points, which leads to requiring a large number of ensemble networks. Theoretically, the variance of the Q-values for an OOD action along wmin is upper-bounded by some constant multiple of $\epsilon$.</li></ul><h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><p>Based on SAC, and add Ensembled-Similarity objective to the gradient of Q-value function.<br><img src="/img/post_img/paper-rl-07/paper-rl-07_1.png"></p><h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>D4RL Mujoco and Adroit<br>SAC, CQL, REM, BC</p><h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ol><li>Evaluation on D4RL MuJoCo Gym tasks (baselines) $\to$<ul><li>The performance gap of EDAC is especially high for random, medium, and medium-replay datasets. </li><li>EDAC uses a much smaller Q-ensemble size compared to SAC-N.</li><li>EDAC choose from a more diverse range of actions compared to CQL.</li></ul></li><li>Evaluation on D4RL Adroit tasks (baselines) $\to$ Better performance.</li><li>Computational cost comparison (SAC CQL) $\to$ EDAC runs faster than CQL with comparable memory consumption.</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>学术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RL</tag>
+      
+      <tag>Algorithm</tag>
+      
+      <tag>Online</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【论文随笔】SAC</title>
     <link href="/2023/04/10/paper-rl-06/"/>
     <url>/2023/04/10/paper-rl-06/</url>
@@ -23,6 +52,8 @@
       <tag>RL</tag>
       
       <tag>Algorithm</tag>
+      
+      <tag>Online</tag>
       
     </tags>
     
