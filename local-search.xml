@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>【论文随笔】TATU</title>
+    <link href="/2023/04/13/paper-rl-09/"/>
+    <url>/2023/04/13/paper-rl-09/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://arxiv.org/abs/2304.04660">Uncertainty-driven Trajectory Truncation for Model-based Offline Reinforcement Learning</a></p></blockquote><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>The generated samples from the trained dynamics model are <strong>not completely reliable</strong>.</p><h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>Adaptively <strong>truncates the synthetic trajectory</strong> if the <strong>accumulated uncertainty</strong> along the trajectory is too large.</p><h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ul><li>Derive the performance bound for $\varepsilon$-Pessimistic MDP w.r.t. real MDP.<ul><li>Illustrates the sub-optimality of the policy trained with the $\varepsilon$-Pessimistic MDP.</li><li>A further simplified upper bound of the sub-optimality if the dataset is large enough.</li></ul></li></ul><h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><ul><li>$\underline{line3}$: Train an ensemble of N dynamics models via maximum log-likelihood.</li><li>$\underline{line4}$: [Construct $\varepsilon$-Pessimistic MDP] Set the uncertainty threshold based on the maximum transition uncertainty in the dataset.   <img src="/img/post_img/paper-rl-09/paper-rl-09_1.png"  style="zoom: 80%;" /> </li><li>$\underline{line5}$: (OPTIONAL) If incorporated TATU with model free methods, an additional rollout policy is required, which is constructed by CVAE to guarantee that the generated actions lie in the span of dataset.   <img src="/img/post_img/paper-rl-09/paper-rl-09_2.png"  style="zoom: 80%;" /> </li><li>$\underline{line12}$: [Construct $\varepsilon$-Pessimistic MDP] Reward is additionally penalized in terms of uncertainty.  <img src="/img/post_img/paper-rl-09/paper-rl-09_3.png"  style="zoom: 80%;" /> </li><li>$\underline{line13}$: [Construct $\varepsilon$-Pessimistic MDP] Use an MOPO-style uncertainty estimator.</li><li>$\underline{line14 \sim 18}$: Generate conservative trajectory by truncating trajectory whose accumulated uncertainty exceeds threshold. </li></ul><img src="/img/post_img/paper-rl-09/paper-rl-09_4.png"  style="zoom: 80%;" /> <h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>D4RL (Mujoco)<br>Backbones: MOPO, COMBO, CQL, TD3_BC, BCQ<br>Baselines: backbone and MOReL, BC, IQL, DT</p><h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ol><li>Combine with model-based offline RL (TATU+MOPO, TATU+COMBO, baselines) $\to$ TATU markedly boosts the performance of base methods on most of the datasets.</li><li>Combine with model-free offline RL (TATU+CQL, TATU+BCQ, TATU+TD3_BC, baselines) $\to$ TATU significantly improves the performance of the base methods on many datasets, especially on poor-quality datasets.</li><li>Parameter study $\to$ Rollout horizon $h$, Threshold coefficient $\alpha$, Real data ratio $\eta$.</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>学术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RL</tag>
+      
+      <tag>Offline</tag>
+      
+      <tag>Algorithm</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【论文随笔】CQL</title>
     <link href="/2023/04/12/paper-rl-08/"/>
     <url>/2023/04/12/paper-rl-08/</url>
