@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>【论文随笔】MAPLE</title>
+    <link href="/2023/04/22/paper-rl-10/"/>
+    <url>/2023/04/22/paper-rl-10/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://proceedings.neurips.cc/paper/2021/hash/470e7a4f017a5476afb7eeb3f8b96f9b-Abstract.html">Offline Model-based Adaptable Policy Learning</a></p></blockquote><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Offline RL methods that learn in the policy space <strong>constrained to in-support regions</strong> by the offline dataset can <strong>limit the potential</strong> of the outcome policies.</p><h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p><strong>Model OOD regions</strong> by constructing all possible transition patterns.<br>First, construct ensemble dynamics models.<br>Then, to be aware of each case of the transition dynamics and learn an adaptable policy, we use a <strong>meta-learning technique</strong> that introduces an extra <strong>environment-context extractor</strong> structure to represent dynamics patterns, and the <strong>policy adjusts itself</strong> according to the environment contexts.</p><h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ul><li>Prove the performance gap between proposed adapative policy $\pi_{a}$ and common constraint-based policy $\pi_{c}$.</li></ul><h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><ul><li><strong>Context-aware adaptable policy</strong> $\pi_{\phi}$: The context-aware policy $\pi \left( a | s, z \right)$ takes actions based on the current state $s$ and the vector of environment-context $z$ of a given environment $z=\phi \left( \hat{\rho} \right)$. Optimize $\phi$ and $\pi_{\phi}$ by the following objective function:<br><img src="/img/post_img/paper-rl-10/paper-rl-10_1.png"><ul><li><strong>Environment-context extractor</strong> $\phi$: Using a RNN to embed the sequential information into environment-context vectors $z_{t}=\phi \left( s_{t}, a_{t-1}, z_{t-1} \right)$. The extractor is trained via <em>Probe-Reduce</em> loop.<br><img src="/img/post_img/paper-rl-10/paper-rl-10_2.png"></li></ul></li><li><strong>Dynamic model set</strong>: Use ensemble technique which would predict similar transitions in the accessible space and predict different transitions in inaccessible space. Several tricks are added to mitigate compounding error:<ul><li>Constrain the maximum rollout length.</li><li>Penalize reward based on uncertainty (same as MOPO but with relaxed coefficients)</li><li>Terminate trajectories when the predicted next states are out of range of $\left( s_{min}, s_{max} \right)$.</li></ul></li></ul><img src="/img/post_img/paper-rl-10/paper-rl-10_2.png"  style="zoom: 80%;" /> <h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>D4RL(Mujoco)<br>MOPO, SAC, BEAR, BRAC-v, CQL, BC</p><h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ol><li>Comparative Evaluation on Benchmark Tasks (baselines) $\to$ MAPLE performs better than other SOTA in 7 out of 12 tasks.</li><li>Analysis of MAPLE $\to$ Analyze the relationship among constraint degree (maximum rollout horizon), the size of ensemble models, and the asymptotic performance.</li><li>MAPLE with large dynamics model set $\to$ Increasing the model size is significantly helpful to find a better and robust adaptable policy via expanding the exploration boundary.</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>学术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RL</tag>
+      
+      <tag>Offline</tag>
+      
+      <tag>Algorithm</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【论文随笔】TATU</title>
     <link href="/2023/04/13/paper-rl-09/"/>
     <url>/2023/04/13/paper-rl-09/</url>
