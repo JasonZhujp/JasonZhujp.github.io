@@ -16,16 +16,16 @@
   <meta name="author" content="Jason Zhu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Offline Model-based Adaptable Policy Learning | NeurIPS">
+    <meta name="description" content="Offline Model-based Adaptable Policy Learning | NeurIPS 2021">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【论文随笔】MAPLE">
 <meta property="og:url" content="https://jasonzhujp.github.io/2023/04/22/paper-rl-10/index.html">
 <meta property="og:site_name" content="JasonZhu&#39;s Blog">
-<meta property="og:description" content="Offline Model-based Adaptable Policy Learning | NeurIPS">
+<meta property="og:description" content="Offline Model-based Adaptable Policy Learning | NeurIPS 2021">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-10_index.png">
 <meta property="article:published_time" content="2023-04-22T07:52:20.000Z">
-<meta property="article:modified_time" content="2023-04-22T11:39:51.894Z">
+<meta property="article:modified_time" content="2023-04-23T10:32:10.722Z">
 <meta property="article:author" content="Jason Zhu">
 <meta property="article:tag" content="RL">
 <meta property="article:tag" content="Offline">
@@ -282,19 +282,19 @@
 <li>Prove the performance gap between proposed adapative policy $\pi_{a}$ and common constraint-based policy $\pi_{c}$.</li>
 </ul>
 <h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><ul>
-<li><strong>Context-aware adaptable policy</strong> $\pi_{\phi}$ : The context-aware policy $\pi \left( a | s, z \right)$ takes actions based on the current state $s$ and the vector of environment-context $z$ of a given environment $z=\phi \left( \hat{\rho} \right)$. Optimize $\phi$ and $\pi_{\phi}$ by the following objective function:</li>
-</ul>
-<p><img src="/img/post_img/paper-rl-10/paper-rl-10_1.png" srcset="/img/loading.gif" lazyload></p>
+<li><p><strong>Context-aware adaptable policy</strong> $\pi_{\phi}$ : The context-aware policy $\pi \left( a | s, z \right)$ takes actions based on the current state $s$ and the vector of environment-context $z$ of a given environment $z=\phi \left( \hat{\rho} \right)$. Optimize $\phi$ and $\pi_{\phi}$ by the following objective function:<center><img src="/img/post_img/paper-rl-10/paper-rl-10_1.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;" /></center></p>
+</li>
+<li><p><strong>Environment-context extractor</strong> $\phi$ : Using a RNN to embed the sequential information into environment-context vectors $z_{t}=\phi \left( s_{t}, a_{t-1}, z_{t-1} \right)$. The extractor is trained via <em>Probe-Reduce</em> loop. The context-aware policy can automatically probe environments and reduce the policy set.<center><img src="/img/post_img/paper-rl-10/paper-rl-10_2.png" srcset="/img/loading.gif" lazyload/></center></br></p>
+</li>
+<li><p><strong>Dynamic model set</strong>: Use ensemble technique which would predict similar transitions in the accessible space and predict different transitions in inaccessible space. Several tricks are added to mitigate compounding error:</p>
 <ul>
-<li><strong>Environment-context extractor</strong> $\phi$ : Using a RNN to embed the sequential information into environment-context vectors $z_{t}=\phi \left( s_{t}, a_{t-1}, z_{t-1} \right)$. The extractor is trained via <em>Probe-Reduce</em> loop. The context-aware policy can automatically probe environments and reduce the policy set.<br><img src="/img/post_img/paper-rl-10/paper-rl-10_2.png" srcset="/img/loading.gif" lazyload> </br></br></li>
-<li><strong>Dynamic model set</strong>: Use ensemble technique which would predict similar transitions in the accessible space and predict different transitions in inaccessible space. Several tricks are added to mitigate compounding error:<ul>
 <li>Constrain the maximum rollout length.</li>
 <li>Penalize reward based on uncertainty (same as MOPO but with relaxed coefficients)</li>
 <li>Terminate trajectories when the predicted next states are out of range of $\left( s_{min}, s_{max} \right)$.  </li>
 </ul>
 </li>
 </ul>
-<img src="/img/post_img/paper-rl-10/paper-rl-10_3.png" srcset="/img/loading.gif" lazyload  style="zoom: 80%;" /> 
+<center><img src="/img/post_img/paper-rl-10/paper-rl-10_3.png" srcset="/img/loading.gif" lazyload  style="zoom: 90%;" /></center>
 
 <h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>D4RL(Mujoco)<br>MOPO, SAC, BEAR, BRAC-v, CQL, BC</p>
 <h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ol>
@@ -395,6 +395,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/04/23/paper-rl-11/" title="【论文随笔】BCQ">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【论文随笔】BCQ</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
