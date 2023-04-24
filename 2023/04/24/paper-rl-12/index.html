@@ -16,26 +16,26 @@
   <meta name="author" content="Jason Zhu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Off-Policy Deep Reinforcement Learning without Exploration | ICML 2019">
+    <meta name="description" content="When Data Geometry Meets Deep Function:Generalizing Offline Reinforcement Learning | ICLR 2023">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【论文随笔】BCQ">
-<meta property="og:url" content="https://jasonzhujp.github.io/2023/04/23/paper-rl-11/index.html">
+<meta property="og:title" content="【论文随笔】DOGE">
+<meta property="og:url" content="https://jasonzhujp.github.io/2023/04/24/paper-rl-12/index.html">
 <meta property="og:site_name" content="JasonZhu&#39;s Blog">
-<meta property="og:description" content="Off-Policy Deep Reinforcement Learning without Exploration | ICML 2019">
+<meta property="og:description" content="When Data Geometry Meets Deep Function:Generalizing Offline Reinforcement Learning | ICLR 2023">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-11_index.png">
-<meta property="article:published_time" content="2023-04-23T09:18:32.000Z">
-<meta property="article:modified_time" content="2023-04-23T10:30:08.417Z">
+<meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-12_index.png">
+<meta property="article:published_time" content="2023-04-24T09:27:05.000Z">
+<meta property="article:modified_time" content="2023-04-24T10:39:47.955Z">
 <meta property="article:author" content="Jason Zhu">
 <meta property="article:tag" content="RL">
 <meta property="article:tag" content="Offline">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-11_index.png">
+<meta name="twitter:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-12_index.png">
   
   
   
-  <title>【论文随笔】BCQ - JasonZhu&#39;s Blog</title>
+  <title>【论文随笔】DOGE - JasonZhu&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,13 +190,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/post_img/paper-rl-11/paper-rl-11_banner.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/post_img/paper-rl-12/paper-rl-12_banner.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【论文随笔】BCQ"></span>
+            <span id="subtitle" data-typed-text="【论文随笔】DOGE"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-23 17:18" pubdate>
-          2023年4月23日 下午
+        <time datetime="2023-04-24 17:27" pubdate>
+          2023年4月24日 下午
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.4k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          11 分钟
+          13 分钟
         
       </span>
     
@@ -268,37 +268,41 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【论文随笔】BCQ</h1>
+            <h1 style="display: none">【论文随笔】DOGE</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1812.02900">Off-Policy Deep Reinforcement Learning without Exploration</a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2205.11027.pdf">When Data Geometry Meets Deep Function:Generalizing Offline Reinforcement Learning</a></p>
 </blockquote>
-<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Due to <strong>errors introduced by extrapolation</strong>, standard off-policy deep RL algorithms are incapable of learning without data correlated to the distribution under the current policy.</p>
-<h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p><strong>Off-policy agents perform dramatically worse than the behavioral agent</strong> when trained with the same algorithm on the same dataset. It deteriorates rapidly when the <strong>data is uncorrelated</strong> and the value estimate produced by the deep Q-network diverges.</p>
-<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>Agents are trained to maximize reward while <strong>minimizing the mismatch</strong> between the state-action visitation of the policy and the state-action pairs contained in the batch. BCQ uses a <strong>state-conditioned generative model</strong> to produce only previously seen actions.</p>
+<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Existing offline RL methods are often <strong>over-conservative</strong>, inevitably hurting generalization performance outside data distribution.</p>
+<h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><ul>
+<li>Existing offline RL(TD3+BC, CQL, IQL) fail when remove only small areas of data on critical regions.<center><img src="/img/post_img/paper-rl-12/paper-rl-12_1.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;" /></center></li>
+<li>Deep Q functions <strong>interpolate well</strong> but <strong>struggle to extrapolate</strong>.</li>
+</ul>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>DOGE marries <strong>dataset geometry</strong> with deep function approximators in offline RL which is characterized by a <strong>state-conditioned distance function</strong>. It enables <strong>exploitation in generalizable OOD areas</strong> rather than strictly constraining policy within data distribution.</p>
 <h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ul>
-<li>The cause of extrapolation error can be attributed to <strong>absent data</strong>, <strong>model bias</strong>, <strong>training mismatch</strong>.</li>
-<li>By inducing a data distribution that is <strong>contained entirely within the batch</strong>, batch-constrained policies can <strong>eliminate extrapolation error entirely</strong> for deterministic MDPs.</li>
-<li>Batch-constrained variant of Q-learning <strong>converges to the optimal policy</strong> under the same conditions as the standard form of Q-learning.</li>
-<li>For a deterministic MDP, batch-constrained Q-learning is guaranteed to <strong>match or outperform the behavioral policy</strong> when starting from any state contained in the batch.</li>
+<li>Explain why deep Q functions under neural tanget kernel assumptions <strong>interpolate well inside or near the boundaries of the convex hull</strong> formed by dataset.</li>
+<li>Properties of the optimal state-conditioned distance function $g^{\ast}\left(s,a\right)$.<ul>
+<li>The distance function is <strong>convex</strong> w.r.t. actions is an upper bound of the distance to the state-conditioned centroid $a_{o}\left(s\right)$ of training dataset.</li>
+<li>The negative gradient of the distance function at an extrapolated action $\hat{a}$, $-\nabla_{\hat{a}}g^{\ast}\left(s,\hat{a}\right)$, <strong>points inside the convex hull</strong> of the dataset.</li>
 </ul>
-<h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><ul>
-<li><p><strong>State-conditioned generative model</strong>: Sample $n$ actions similar to batch $B$ in terms of current state $s$ implemented with CVAE.</p>
-</li>
-<li><p><strong>Perturbation model</strong>: Increase the diversity of seen actions. It outputs an adjustment to an action a in the range $\left[ -\Phi,\Phi \right]$. The policy can be written as:<center><img src="/img/post_img/paper-rl-11/paper-rl-11_1.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;" /></center><br>The generative model, together with the perturbation model can be viewd as “actor”, which updates via gradient ascend:<center><img src="/img/post_img/paper-rl-11/paper-rl-11_2.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;" /></center></p>
-</li>
-<li><p><strong>Variant of clipped double Q-learning</strong>: Penalize high variance estimated in regions of uncertainty an push the policy to states contained in batch. Take a convex combination of the two values, with a higher weight on the minimum, to form the taraget Q-value:<center><img src="/img/post_img/paper-rl-11/paper-rl-11_3.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;" /></center></br></p>
 </li>
 </ul>
-<center><img src="/img/post_img/paper-rl-11/paper-rl-11_4.png" srcset="/img/loading.gif" lazyload  style="zoom: 80%;" /></center>
+<center><img src="/img/post_img/paper-rl-12/paper-rl-12_5.png" srcset="/img/loading.gif" lazyload/></center></br>
 
-<h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>Mujoco<br>DDPG, DQN, BC, VAE-BC</p>
+<ul>
+<li>Define Bellman-consistent coefficient and constrained policy set. Then, present the upper bound of the coefficient and the <strong>performance bound</strong> of DOGE.</li>
+</ul>
+<h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><p>Learn the state-conditioned distance function $g\left(s, a\right)$ by solving the following regression problem, with $\left(s, a\right) \sim D$ and synthetic noise actions $\hat{a}$ sampled from the uniform distribution over full action space $\mathcal{A}$.<center><img src="/img/post_img/paper-rl-12/paper-rl-12_2.png" srcset="/img/loading.gif" lazyload  style="zoom: 80%;" /></center><br>Build DOGE on top of TD3 by simply plugging the state-conditioned distance function as a policy regularization term during policy training process.<center><img src="/img/post_img/paper-rl-12/paper-rl-12_3.png" srcset="/img/loading.gif" lazyload  style="zoom: 80%;" /></center>$\lambda$ is the Lagrangian multiplier, which is auto-adjusted using dual gradient descent. $Q$ values are rescaled by $\beta=\frac{\alpha}{\frac{1}{n}{\textstyle \sum_{i=1}^{n}}\left|Q\left(s_{i},a_{i}\right)\right|}$ to balance $Q$ function maximization and policy constraint satisfaction.</br></br></p>
+<center><img src="/img/post_img/paper-rl-12/paper-rl-12_4.png" srcset="/img/loading.gif" lazyload  style="zoom: 90%;" /></center>
+
+<h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>D4RL(Mujoco, AntMaze)<br>TD3+BC, CQL, IQL, BCQ, BEAR, BC</p>
 <h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ol>
-<li>Compare to baselines $\to$ BCQ succeeds at all tasks, matching or outperforming the behavioral policy in each instance with a single set of fixed hyper-parameters.</li>
-<li>Performance in imperfect demonstrations $\to$ BCQ is able to strongly outperform the noisy demonstrator, disentangling poor and expert actions in remarkably few iterations.</li>
+<li>Comparison with SOTA [baseline] $\to$ DOGE is the first policy constraint method to successfully solve AntMaze-medium and AntMaze-large tasks.</li>
+<li>Evaluation on generalization [TD3+BC, CQL, IQL] (remove small areas of data from the critical pathways to the destination in AntMaze) $\to$ All these methods struggle to generalize well on the missing areas and suffer severe performance drop, while DOGE maintains competitive performance.</li>
+<li>Ablation study (hyperparameter $\alpha$, $G$ and $N$) $\to$ $G$ has a more significant impact on the performance. A more tolerant $G$ achieves relatively good performance.</li>
 </ol>
 
                 
@@ -349,8 +353,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【论文随笔】BCQ</div>
-      <div>https://jasonzhujp.github.io/2023/04/23/paper-rl-11/</div>
+      <div>【论文随笔】DOGE</div>
+      <div>https://jasonzhujp.github.io/2023/04/24/paper-rl-12/</div>
     </div>
     <div class="license-meta">
       
@@ -362,7 +366,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月23日</div>
+          <div>2023年4月24日</div>
         </div>
       
       
@@ -394,18 +398,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/24/paper-rl-12/" title="【论文随笔】DOGE">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【论文随笔】DOGE</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/22/paper-rl-10/" title="【论文随笔】MAPLE">
-                        <span class="hidden-mobile">【论文随笔】MAPLE</span>
+                      <a href="/2023/04/23/paper-rl-11/" title="【论文随笔】BCQ">
+                        <span class="hidden-mobile">【论文随笔】BCQ</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

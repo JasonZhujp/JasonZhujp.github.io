@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>【论文随笔】DOGE</title>
+    <link href="/2023/04/24/paper-rl-12/"/>
+    <url>/2023/04/24/paper-rl-12/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://arxiv.org/pdf/2205.11027.pdf">When Data Geometry Meets Deep Function:Generalizing Offline Reinforcement Learning</a></p></blockquote><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Existing offline RL methods are often <strong>over-conservative</strong>, inevitably hurting generalization performance outside data distribution.</p><h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><ul><li>Existing offline RL(TD3+BC, CQL, IQL) fail when remove only small areas of data on critical regions.<center><img src="/img/post_img/paper-rl-12/paper-rl-12_1.png" style="zoom: 80%;" /></center></li><li>Deep Q functions <strong>interpolate well</strong> but <strong>struggle to extrapolate</strong>.</li></ul><h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>DOGE marries <strong>dataset geometry</strong> with deep function approximators in offline RL which is characterized by a <strong>state-conditioned distance function</strong>. It enables <strong>exploitation in generalizable OOD areas</strong> rather than strictly constraining policy within data distribution.</p><h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ul><li>Explain why deep Q functions under neural tanget kernel assumptions <strong>interpolate well inside or near the boundaries of the convex hull</strong> formed by dataset.</li><li>Properties of the optimal state-conditioned distance function $g^{\ast}\left(s,a\right)$.<ul><li>The distance function is <strong>convex</strong> w.r.t. actions is an upper bound of the distance to the state-conditioned centroid $a_{o}\left(s\right)$ of training dataset.</li><li>The negative gradient of the distance function at an extrapolated action $\hat{a}$, $-\nabla_{\hat{a}}g^{\ast}\left(s,\hat{a}\right)$, <strong>points inside the convex hull</strong> of the dataset.</li></ul></li></ul><center><img src="/img/post_img/paper-rl-12/paper-rl-12_5.png"/></center></br><ul><li>Define Bellman-consistent coefficient and constrained policy set. Then, present the upper bound of the coefficient and the <strong>performance bound</strong> of DOGE.</li></ul><h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><p>Learn the state-conditioned distance function $g\left(s, a\right)$ by solving the following regression problem, with $\left(s, a\right) \sim D$ and synthetic noise actions $\hat{a}$ sampled from the uniform distribution over full action space $\mathcal{A}$.<center><img src="/img/post_img/paper-rl-12/paper-rl-12_2.png"  style="zoom: 80%;" /></center><br>Build DOGE on top of TD3 by simply plugging the state-conditioned distance function as a policy regularization term during policy training process.<center><img src="/img/post_img/paper-rl-12/paper-rl-12_3.png"  style="zoom: 80%;" /></center>$\lambda$ is the Lagrangian multiplier, which is auto-adjusted using dual gradient descent. $Q$ values are rescaled by $\beta=\frac{\alpha}{\frac{1}{n}{\textstyle \sum_{i=1}^{n}}\left|Q\left(s_{i},a_{i}\right)\right|}$ to balance $Q$ function maximization and policy constraint satisfaction.</br></br></p><center><img src="/img/post_img/paper-rl-12/paper-rl-12_4.png"  style="zoom: 90%;" /></center><h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>D4RL(Mujoco, AntMaze)<br>TD3+BC, CQL, IQL, BCQ, BEAR, BC</p><h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ol><li>Comparison with SOTA [baseline] $\to$ DOGE is the first policy constraint method to successfully solve AntMaze-medium and AntMaze-large tasks.</li><li>Evaluation on generalization [TD3+BC, CQL, IQL] (remove small areas of data from the critical pathways to the destination in AntMaze) $\to$ All these methods struggle to generalize well on the missing areas and suffer severe performance drop, while DOGE maintains competitive performance.</li><li>Ablation study (hyperparameter $\alpha$, $G$ and $N$) $\to$ $G$ has a more significant impact on the performance. A more tolerant $G$ achieves relatively good performance.</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>学术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RL</tag>
+      
+      <tag>Offline</tag>
+      
+      <tag>Algorithm</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【论文随笔】BCQ</title>
     <link href="/2023/04/23/paper-rl-11/"/>
     <url>/2023/04/23/paper-rl-11/</url>
