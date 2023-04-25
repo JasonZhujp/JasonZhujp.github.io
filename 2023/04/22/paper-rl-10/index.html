@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-10_index.png">
 <meta property="article:published_time" content="2023-04-22T07:52:20.000Z">
-<meta property="article:modified_time" content="2023-04-23T10:32:10.722Z">
+<meta property="article:modified_time" content="2023-04-25T16:24:06.802Z">
 <meta property="article:author" content="Jason Zhu">
 <meta property="article:tag" content="RL">
 <meta property="article:tag" content="Offline">
@@ -274,7 +274,7 @@
               <div class="markdown-body">
                 
                 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2021/hash/470e7a4f017a5476afb7eeb3f8b96f9b-Abstract.html">Offline Model-based Adaptable Policy Learning</a></p>
+<p><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2021/hash/470e7a4f017a5476afb7eeb3f8b96f9b-Abstract.html">Offline Model-based Adaptable Policy Learning</a>&nbsp;&nbsp;&nbsp;NeurIPS 2021</p>
 </blockquote>
 <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Offline RL methods that learn in the policy space <strong>constrained to in-support regions</strong> by the offline dataset can <strong>limit the potential</strong> of the outcome policies.</p>
 <h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p><strong>Model OOD regions</strong> by constructing all possible transition patterns and give a <strong>probe-reduce paradigm</strong> for decision-making in OOD regions.<br>First, construct ensemble dynamics models.<br>Then, to be aware of each case of the transition dynamics and learn an adaptable policy, we use a <strong>meta-learning technique</strong> that introduces an extra <strong>environment-context extractor</strong> structure to represent dynamics patterns, and the <strong>policy adjusts itself</strong> according to the environment contexts.</p>
