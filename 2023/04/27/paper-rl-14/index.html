@@ -16,26 +16,26 @@
   <meta name="author" content="Jason Zhu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Model-Based Offline Planning with Trajectory Pruning | IJCAI 2022">
+    <meta name="description" content="Double Check Your State Before Trusting It:Confidence-Aware Bidirectional Offline Model-Based Imagination | NeurIPS 2022">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【论文随笔】MOPP">
-<meta property="og:url" content="https://jasonzhujp.github.io/2023/04/25/paper-rl-13/index.html">
+<meta property="og:title" content="【论文随笔】CABI">
+<meta property="og:url" content="https://jasonzhujp.github.io/2023/04/27/paper-rl-14/index.html">
 <meta property="og:site_name" content="JasonZhu&#39;s Blog">
-<meta property="og:description" content="Model-Based Offline Planning with Trajectory Pruning | IJCAI 2022">
+<meta property="og:description" content="Double Check Your State Before Trusting It:Confidence-Aware Bidirectional Offline Model-Based Imagination | NeurIPS 2022">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-13_index.png">
-<meta property="article:published_time" content="2023-04-25T15:46:40.000Z">
-<meta property="article:modified_time" content="2023-04-25T16:17:49.314Z">
+<meta property="og:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-14_index.png">
+<meta property="article:published_time" content="2023-04-27T12:04:57.000Z">
+<meta property="article:modified_time" content="2023-04-27T12:50:28.544Z">
 <meta property="article:author" content="Jason Zhu">
 <meta property="article:tag" content="RL">
 <meta property="article:tag" content="Offline">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-13_index.png">
+<meta name="twitter:image" content="https://jasonzhujp.github.io/img/index_img/paper-rl-14_index.png">
   
   
   
-  <title>【论文随笔】MOPP - JasonZhu&#39;s Blog</title>
+  <title>【论文随笔】CABI - JasonZhu&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,13 +190,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/post_img/paper-rl-13/paper-rl-13_banner.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/post_img/paper-rl-14/paper-rl-14_banner.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【论文随笔】MOPP"></span>
+            <span id="subtitle" data-typed-text="【论文随笔】CABI"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-25 23:46" pubdate>
-          2023年4月25日 晚上
+        <time datetime="2023-04-27 20:04" pubdate>
+          2023年4月27日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          1.9k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          12 分钟
+          10 分钟
         
       </span>
     
@@ -268,41 +268,30 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【论文随笔】MOPP</h1>
+            <h1 style="display: none">【论文随笔】CABI</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2105.07351">Model-Based Offline Planning with Trajectory Pruning</a>&nbsp;&nbsp;&nbsp;IJCAI 2022</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2206.07989">Double Check Your State Before Trusting It: Confidence-Aware Bidirectional Offline Model-Based Imagination</a>&nbsp;&nbsp;&nbsp;NeurIPS 2022</p>
 </blockquote>
-<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><ul>
-<li>A <strong>light-weighted policy improvement</strong> procedure is required by real-world robotic and industrial setting.</li>
-<li>Industrial control tasks often require extra <strong>control flexibility</strong> (change reward signals or involve constraints due to safety considerations).</li>
-<li>Try to tackles the dilemma between the restrictions of offline learning and high-performance <strong>planning</strong>.</li>
-</ul>
-<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>MOPP <strong>encourages more aggressive trajectory rollout</strong> guided by the behavior policy learned from data to improve exploration, and <strong>prunes out problematic trajectories</strong> to avoid potential out-of-distribution samples.</p>
+<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>The <strong>imagined transitions</strong> generated by learned dynamics may be <strong>inaccurate</strong> in offline model-based RL method, thus downgrading the performance.</p>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p><strong>Augment</strong> the offline dataset by using trained <strong>bidirectional dynamics models</strong> and rollout policies with <strong>double check</strong>. Conservatism is introduced by trusting samples that the <strong>forward model and backward model agree on</strong>.</p>
 <h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><ol>
-<li><strong>Dynamics and Behavior Policy Learning</strong>: Use autoregressive dynamics model (ADM) to learn the probabilistic dynamics model and behavior policy, which are learned by maximizing log-likelihood on dataset. <center><img src="/img/post_img/paper-rl-13/paper-rl-13_1.png" srcset="/img/loading.gif" lazyload style="zoom:70%;"/></center></br>Use ensembles of $K$ ADMs with randomly permuted orderings for dynamics and behavior policy.</li>
-<li><strong>Value Function Evaluation</strong>: Learning Q-value function through minimizing TD error with offline dataset.<center><img src="/img/post_img/paper-rl-13/paper-rl-13_2.png" srcset="/img/loading.gif" lazyload style="zoom:70%;"/></center></br>Then, calculate value function by sampling.<center><img src="/img/post_img/paper-rl-13/paper-rl-13_3.png" srcset="/img/loading.gif" lazyload style="zoom:70%;"/></center></br></li>
-<li><strong>Offline Planning</strong>：<ol>
-<li><em>Guided Trajectory Rollout</em>: Use the learned behavior policy to sample rollouts in learned dynamic model with a higher degree of freedom. Then, perform max-Q operation on sampled actions based on Q.<center><img src="/img/post_img/paper-rl-13/paper-rl-13_4.png" srcset="/img/loading.gif" lazyload style="zoom:70%;"/></center></br></li>
-<li><em>Trajectory Pruning</em>: Same as MOReL.<center><img src="/img/post_img/paper-rl-13/paper-rl-13_5.png" srcset="/img/loading.gif" lazyload style="zoom:70%;"/></center></br></li>
-<li><em>Trajectory Optimization</em>: The optimized action is obtained by re-weighting the actions of each trajectory according to their exponentiated returns.<center><img src="/img/post_img/paper-rl-13/paper-rl-13_6.png" srcset="/img/loading.gif" lazyload style="zoom:70%;"/></center></br></li>
+<li><strong>Bidirectional dynamics models training</strong>: Train an <strong>ensemble</strong> of bootstrapped probabilistic forward and reverse dynamics models $\hat{p}_ {\varphi}$ and $\hat{p}_ {\phi}$ by maximizing log-likelihood.<center><img src="/img/post_img/paper-rl-14/paper-rl-14_1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;"/></center></li>
+<li><strong>Bidirectional rollout policies training</strong>: Model the rollout policy with CVAE by generating actions that stay within the span of the dataset based on current state. The forward and backward rollout policy are represented by two different CAVEs respectively.<center><img src="/img/post_img/paper-rl-14/paper-rl-14_2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;"/></center></br><center><img src="/img/post_img/paper-rl-14/paper-rl-14_3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;"/></center></li>
+<li><strong>Conservative Data Augmentation</strong>: For foward check, evaluate the deviation of $\tilde{s}_ {t}$ (generate next state $\hat{s}_ {t+1}$ via foward dynamic model and trace back from $\hat{s}_ {t+1}$ with reverse dynamic model to obtain $\tilde{s}_ {t}$ ) from $s_{t}$, and trust $\hat{s}_ {t+1}$ if the state deviation is in the ascending top $k%$ of the mini-batch. Vice versa.</li>
 </ol>
-</li>
-</ol>
-<center><img src="/img/post_img/paper-rl-13/paper-rl-13_7.png" srcset="/img/loading.gif" lazyload  style="zoom: 80%;" /></center>
+<center><img src="/img/post_img/paper-rl-14/paper-rl-14_4.png" srcset="/img/loading.gif" lazyload  style="zoom: 80%;" /></center></br>
+<center><img src="/img/post_img/paper-rl-14/paper-rl-14_5.png" srcset="/img/loading.gif" lazyload  style="zoom: 80%;" /></center></br>
 
-<h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>D4RL(Mujoco, Adroit)<br>MBPO, MOPO, MBOP, BCQ, CQL</p>
+<h2 id="Observation"><a href="#Observation" class="headerlink" title="Observation"></a>Observation</h2><p>Plot the state distributions of generated samples by random policy, forward model, reverse model and CABI respectively.<center><img src="/img/post_img/paper-rl-14/paper-rl-14_6.png" srcset="/img/loading.gif" lazyload  style="zoom: 80%;" /></center></br> Bidirectional modeling with the double check mechanism successfully produces reliable and conservative synthetic samples.</p>
+<h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>D4RL(Androit, Mujoco)<br>Combine CABI with BCQ, TD3_BC, IQL and then compare to UWAC, CQL, BCQ, MOP, COMBO</p>
 <h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ul>
-<li>Comparative Evaluations [baselines] $\to$<ul>
-<li>Performance on Mujoco: MOPP outperforms MBOP in most tasks, which shows great planning improvement upon a random and mixed policy. Model-based MOPO and MBPO can benefit from high-diversity datasets, but MOPP can effectively recover the performant data generating policies in the behavioral data and use planning to further enhance performance.</li>
-<li>Performance on Adroit: Although model-based offline RL methods are known to perform badly on low-diversity datasets, MOPP performs surprisingly well in most cases.</li>
-</ul>
-</li>
-<li>Ablation Study $\to$ Sampling aggressiveness (std scaling parameter $\sigma_{M}$), value function $V_{b}$ , uncertainty threshold $L$ in trajectory pruning.</li>
-<li>Evaluation on <strong>Control Flexibility</strong> (halfcheetah-jump and halfcheetah-constrained) $\to$ Only re-evaluate a sub-component of MOPP is required to guarantee the best performance rather than re-train the whole model as in typical RL settings. Adding constraint penalty in the reward function while re-evaluating the $Q_{b}$ via FQE leads to the safest policy.</li>
+<li>Performance on Adroit $\to$ Offline MBRL generally fail on Adroit due to <em>narrow data distribution and accumulated error</em> produced by actor. CABI improves the performance via bidirectional dynamics and double check.</li>
+<li>Ablation Study $\to$ the importance of double check, compare with forward/backward imagination, compare with other data augmentation methods.</li>
+<li>Performance on Mujoco $\to$ CABI is a powerful <em>data augmentation method</em> and can boost the performance of the model-free offline RL methods.</li>
 </ul>
 
                 
@@ -353,8 +342,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【论文随笔】MOPP</div>
-      <div>https://jasonzhujp.github.io/2023/04/25/paper-rl-13/</div>
+      <div>【论文随笔】CABI</div>
+      <div>https://jasonzhujp.github.io/2023/04/27/paper-rl-14/</div>
     </div>
     <div class="license-meta">
       
@@ -366,7 +355,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月25日</div>
+          <div>2023年4月27日</div>
         </div>
       
       
@@ -398,18 +387,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/27/paper-rl-14/" title="【论文随笔】CABI">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【论文随笔】CABI</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/24/paper-rl-12/" title="【论文随笔】DOGE">
-                        <span class="hidden-mobile">【论文随笔】DOGE</span>
+                      <a href="/2023/04/25/paper-rl-13/" title="【论文随笔】MOPP">
+                        <span class="hidden-mobile">【论文随笔】MOPP</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
