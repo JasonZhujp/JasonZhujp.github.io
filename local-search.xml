@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>【论文随笔】AMPL</title>
+    <link href="/2023/06/08/paper-rl-15/"/>
+    <url>/2023/06/08/paper-rl-15/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://arxiv.org/pdf/2210.05922.pdf">A Unified Framework for Alternating Offline Model Training and Policy Learning</a>&nbsp;&nbsp;&nbsp;NeurIPS 2022</p></blockquote><h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p> The learning objectives for the dynamic models and the policies are isolated. Such <strong>objective mismatch</strong> may lead to inferior performance of the learned agents.</p><h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><p>Maximize a lower bound of the true expected return, by <strong>alternating between dynamic-model training and policy learning</strong>. Propose a fixed-point-style method for <strong>marginal importance weights (MIW) estimation</strong> between the offline-data distribution and the one of the current policy. </p><h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><ol><li>Present a tractable upper bound for <strong>evaluation error</strong>. <center><img src="/img/post_img/paper-rl-15/paper-rl-15_1.png" style="zoom:80%;"/></center> We can fix $\pi$ and train the dynamic model $\hat{P}$ by minimizing $D_{\pi}\left(P^{\ast},\hat{P}\right)$ w.r.t. $\hat{P}$. Similarly, we can fix the dynamic model $\hat{P}$ and learn a policy $\pi$ to maximize the lower bound of $J(\pi,P^{\ast})$. </li><li>On finite state-action space, if the current policy $\pi$ is close to the behavior policy $\pi_{b}$, then the iterate for $\omega$ defined by $\mathcal{T}$ converges geometrically.</li></ol><h2 id="Algo"><a href="#Algo" class="headerlink" title="Algo"></a>Algo</h2><ol><li><strong>Dynamic model training</strong>: Expanding the KL term in $D_{\pi}\left(P^{\ast},\hat{P}\right)$: <center><img src="/img/post_img/paper-rl-15/paper-rl-15_2.png" style="zoom:80%;"/></center> If the policy $\pi$ is fixed, the term ① is a constant w.r.t. $\hat{P}$. Given the MIW $\omega$, we can optimize $\hat{P}$ by minimizing the following loss:<center><img src="/img/post_img/paper-rl-15/paper-rl-15_3.png" style="zoom:80%;"/></center> which is an MLE objective weighted by $\omega\left(s,a\right)$. </br> <em>[Practical]</em> Use an ensemble of Gaussian probabilistic networks $\hat{P}\left(\cdot|s,a\right)$ and $\hat{r}\left(s,a\right)$. Initialize the dynamic model by standard MLE training, and periodically update the model by minimizing Eq.(6).</li><li><strong>Marginal importance weight $\omega\left(s,a\right)$ training</strong>: A “Bellman equation” for $\omega\left(s’,a’\right)$ is: <center><img src="/img/post_img/paper-rl-15/paper-rl-15_7.png" style="zoom:80%;"/></center> The update iterate defined by $\mathcal{T}$ has the convergence property according to <em>theory 2</em>. </br> <em>[Practical]</em> After multiplying $Q^{\hat{P}}_{\pi}$ to both sides of Eq.(9) and subsequently summing over $\omega\left(s,a\right)$ on both sides, a tractable objective is shown below: <center><img src="/img/post_img/paper-rl-15/paper-rl-15_8.png" style="zoom:80%;"/></center> We can optimize $\omega$ by minimizing the difference between the RHS and the LHS of Eq.(10).<center><img src="/img/post_img/paper-rl-15/paper-rl-15_9.png" style="zoom:80%;"/></center></br></li><li><strong>Critic training</strong>: <em>[Practical]</em> Use the conservative target: <center><img src="/img/post_img/paper-rl-15/paper-rl-15_4.png" style="zoom:80%;"/></center></br></li><li><strong>Estimating $D_{\pi}\left(P^{\ast},\hat{P}\right)$</strong>:  Use the dual representation of the Jensen–Shannon divergence to approximate $D_{\pi}\left(P^{\ast},\hat{P}\right)$: <center><img src="/img/post_img/paper-rl-15/paper-rl-15_5.png" style="zoom:80%;"/></center></br> <em>[Practical]</em> Approximately minimize $D_{\pi}\left(P^{\ast},\hat{P}\right)$ using GAN structure. <center><img src="/img/post_img/paper-rl-15/paper-rl-15_6.png" style="zoom:80%;"/></center></br></li><li><strong>Policy training</strong>: <em>[Practical]</em> <center><img src="/img/post_img/paper-rl-15/paper-rl-15_10.png" style="zoom:80%;"/></center></br></li></ol><center><img src="/img/post_img/paper-rl-15/paper-rl-15_11.png"  style="zoom: 80%;" /></center></br><h2 id="Env-amp-Baselines"><a href="#Env-amp-Baselines" class="headerlink" title="Env &amp; Baselines"></a>Env &amp; Baselines</h2><p>D4RL(Mujoco, Maze2D, Adroit)<br>AlgaeDICE, OptiDICE, CQL, FisherBRC, TD3+BC, MOPO, COMBO, WMOPO</p><h2 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h2><ul><li><strong>Continuous-control results</strong> $\to$ Compared with the DICE-based methods, AMPL shows better performance, indicating that <em>maximize a lower bound of the true expected return</em> can be a more effective framework than <em>explicit stationary-distribution correction</em>, since maximizing the lower bound is more directly related to RL’s goal of maximizing the policy performance.</li><li><strong>Ablation Study</strong> $\to$ <ul><li>The effect of <strong>MIW-weighted model (re)training</strong>. $\to$ Train the model only at beginning using MLE.</li><li>The effect of <strong>MIW estimation</strong>. $\to$ Variational Power Method, GENeralized stationary DIstribution Correction Estimation, and Dual stationary DIstribution Correction Estimation.</li><li>The effect of <strong>wieghted regularizer</strong> for policy learning. $\to$ Policy regularizer that weighted by the MIW $\omega$.</li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>学术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RL</tag>
+      
+      <tag>Offline</tag>
+      
+      <tag>Algorithm</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>【论文随笔】CABI</title>
     <link href="/2023/04/27/paper-rl-14/"/>
     <url>/2023/04/27/paper-rl-14/</url>
