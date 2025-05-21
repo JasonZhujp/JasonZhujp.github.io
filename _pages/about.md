@@ -30,10 +30,9 @@ My research interests include:
 <span class='anchor' id='publications'></span>
 
 # 🔥 News
-- *2025.01* 🥂🥂 Our paper HQA-GAE is accepted by WWW 2025! See you in Sydney!
-- *2025.01* 📸📸 Our paper ACAQL is accepted by TKDE 2025! The system has been applied to Credit Card Center of Bank of Shanghai.
-- *2024.12* 🎉🎉 New homepage!
-- *2024.11* 🥂🥂 Our paper [RELIEF](https://arxiv.org/pdf/2408.03195) is accepted by KDD 2025! See you in Toronto!
+- *2025.05* 🥂🥂 Our paper [MetaTox](https://arxiv.org/abs/2412.15268) is accepted by ACL 2025! See you in Vienna!
+- *2025.01* 🥂🥂 Our paper [HQA-GAE](https://dl.acm.org/doi/abs/10.1145/3696410.3714656) is accepted by WWW 2025! See you in Sydney!
+- *2025.01* 📸📸 Our paper [ACAQL](https://ieeexplore.ieee.org/abstract/document/10836919) is accepted by TKDE 2025! The system has been applied to Credit Card Center of Bank of Shanghai.
 
 {% include_relative includes/pub.md %}
 
@@ -45,7 +44,7 @@ My research interests include:
 
 
 # 📖 Educations
-- *2022.09 - now*, PhD student, Data Science and Engineering, East China Normal University (via postgraduate recommendation and successive postgraduate and doctoral program) <img src='./images/logos/ecnu.png' style='width: 2.3em;'>
+- *2022.09 - now*, PhD candidate, Data Science and Engineering, East China Normal University (via postgraduate recommendation and successive postgraduate and doctoral program) <img src='./images/logos/ecnu.png' style='width: 2.3em;'>
 - *2018.09 - 2022.06*, Undergraduate, School of Information Science and Engineering, East China University of Science and Technology  <img src='./images/logos/ecust.png' style='width: 2.5em;'>
 
 
