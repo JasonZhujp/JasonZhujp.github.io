@@ -54,4 +54,4 @@ My research interests include:
 
 
 # 💻 Internships
-- *2025.09 - now* LLM Application Intern, Foundational R&D Platform Group, Meituan <img src='./images/logos/meituan.png' style='width: 1.5em;'>, Shanghai, China.
+- *2025.09 - now*, LLM Application Intern, Foundational R&D Platform Group, Meituan <img src='./images/logos/meituan.png' style='width: 2.5em;'>, Shanghai, China.
