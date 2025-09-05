@@ -17,7 +17,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am currently a first-year PhD Student at the School of Data Science and Engineering, East China Normal University, under the supervision of Prof. Weining Qian and [Prof. Xiang Li](https://lixiang3776.github.io/) in the PLANING (graPh mining and LANguage processING) lab.
+I am currently a second-year PhD Student at the School of Data Science and Engineering, East China Normal University, under the supervision of [Prof. Weining Qian](https://scholar.google.com.hk/citations?hl=zh-CN&user=KqqoR6gAAAAJ) and [Prof. Xiang Li](https://lixiang3776.github.io/) in the PLANING (graPh mining and LANguage processING) lab.
 
 My research interests include:
 - **Reinforcement Learning**: applications in graph representation learning, retrieval-augmented generation (RAG), financial technology (Fintech);
@@ -53,5 +53,5 @@ My research interests include:
 - *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/) -->
 
 
-<!-- # 💻 Internships -->
-<!-- - *2023.11 - now* NLP Research Intern, NLP Group, Shanghai AI Laboratory <img src='./images/logos/shailab-logo.svg' style='width: 1.90em;'>, Shanghai, China. -->
+# 💻 Internships
+- *2025.09 - now* LLM Application Intern, Foundational R&D Platform Group, Meituan <img src='./images/logos/meituan.png' style='width: 1.5em;'>, Shanghai, China.
