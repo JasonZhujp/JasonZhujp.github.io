@@ -20,25 +20,25 @@ redirect_from:
 I am currently a second-year PhD Student at the School of Data Science and Engineering, East China Normal University, under the supervision of [Prof. Weining Qian](https://scholar.google.com.hk/citations?hl=zh-CN&user=KqqoR6gAAAAJ) and [Prof. Xiang Li](https://lixiang3776.github.io/) in the PLANING (graPh mining and LANguage processING) lab.
 
 My research interests include:
-- **Reinforcement Learning**: applications in graph representation learning, retrieval-augmented generation (RAG), financial technology (Fintech);
-- **Graph Neural Networks**: graph prompt tuning, graph active learning, graph self-supervised learning;
+- **Agentic Reinforcement Learning**: algorithms and applications in agentic tool use, skill augmentation.
 - **Large Language Models**: applications in graph RAG, toxicity detection.
+- **Graph Neural Networks**: graph prompt tuning, graph active learning, graph self-supervised learning.
 
 ★★★ Feel free to reach out to me for academic discussions and collaborations!
 
 
 <span class='anchor' id='publications'></span>
 
-# 🔥 News
+<!-- # 🔥 News
 - *2025.05* 🥂🥂 Our paper [MetaTox](https://arxiv.org/abs/2412.15268) is accepted by ACL 2025! See you in Vienna!
 - *2025.01* 🥂🥂 Our paper [HQA-GAE](https://dl.acm.org/doi/abs/10.1145/3696410.3714656) is accepted by WWW 2025! See you in Sydney!
-- *2025.01* 📸📸 Our paper [ACAQL](https://ieeexplore.ieee.org/abstract/document/10836919) is accepted by TKDE 2025! The system has been applied to Credit Card Center of Bank of Shanghai.
+- *2025.01* 📸📸 Our paper [ACAQL](https://ieeexplore.ieee.org/abstract/document/10836919) is accepted by TKDE 2025! The system has been applied to Credit Card Center of Bank of Shanghai. -->
 
 {% include_relative includes/pub.md %}
 
 
 # 🏆 Honors and Awards
-- *2022-2025* Graduate Academic Scholarship, East China Normal University
+- *2022-2026* Graduate Academic Scholarship, East China Normal University
 - *2022.06* Outstanding Graduate, East China University of Science and Technology
 - *2018-2022* Academic Excellence Scholarship, East China University of Science and Technology 
 
@@ -54,4 +54,4 @@ My research interests include:
 
 
 # 💻 Internships
-- *2025.09 - now*, M17-ARL(Agent in Real Life), Foundational R&D Platform Group, Meituan <img src='./images/logos/meituan.png' style='width: 2.1em;'>, Shanghai, China.
+- *2025.09 - now*, Meituan Longcat Team <img src='./images/logos/meituan.png' style='width: 2.1em;'>, Shanghai, China. Contributed to <img src='./images/logos/longcat.png' style='width: 2.1em;'> [Longcat-flash-thinking-2601](https://arxiv.org/abs/2601.16725), specializing in environment and task synthesis for agentic tool-use in post-training.
