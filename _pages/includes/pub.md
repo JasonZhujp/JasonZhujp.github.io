@@ -1,6 +1,6 @@
 
 # 📑 Selected Publications  <a href='https://scholar.google.com/citations?user=piCIfLwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>
-- `AAAI 2026`[Human Cognition Inspired RAG with Knowledge Graph for Complex Problem Solving](https://ojs.aaai.org/index.php/AAAI/article/view/40291), <br> Yao Cheng, Yibo Zhao, **Jiapeng Zhu**, Yao Liu, Xing Sun, Xiang Li.
+- `AAAI 2026` [Human Cognition Inspired RAG with Knowledge Graph for Complex Problem Solving](https://ojs.aaai.org/index.php/AAAI/article/view/40291), <br> Yao Cheng, Yibo Zhao, **Jiapeng Zhu**, Yao Liu, Xing Sun, Xiang Li.
 
 - `EMNLP 2025` [Text Detoxification: Data Efficiency, Semantic Preservation and Model Generalization](https://arxiv.org/abs/2507.01050), <br> Jing Yu, Yibo Zhao, **Jiapeng Zhu**, Wenming Shao, Bo Pang, Zhao Zhang, Xiang Li.
 
