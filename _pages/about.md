@@ -21,7 +21,7 @@ I am currently a second-year PhD Student at the School of Data Science and Engin
 
 My research interests include:
 - **Agentic Reinforcement Learning**: algorithms and applications in agentic tool use, skill augmentation.
-- **Large Language Models**: applications in graph RAG, toxicity detection.
+- **Large Language Models**: applications in harness, graph RAG, toxicity detection.
 - **Graph Neural Networks**: graph prompt tuning, graph active learning, graph self-supervised learning.
 
 ★★★ Feel free to reach out to me for academic discussions and collaborations!
@@ -56,6 +56,6 @@ My research interests include:
 <span class='anchor' id='internships'></span>
 
 # 💻 Internships
-- *2025.09 - 2026.06*, <img src='./images/logos/meituan.png' style='width: 2.1em;'> Meituan Longcat Team <img src='./images/logos/longcat.png' style='width: 2.1em;'>, Shanghai, China. Contributed to [Longcat-flash-thinking-2601](https://arxiv.org/abs/2601.16725), specializing in environment and task synthesis for agentic tool-use in post-training.
+- *2025.09 - 2026.06*, <img src='./images/logos/meituan.png' style='width: 2.1em;'> Meituan Longcat Team <img src='./images/logos/longcat.png' style='width: 2.1em;'>, Shanghai, China. Contributed to [Longcat-flash-thinking-2601](https://arxiv.org/abs/2601.16725) and [LongCat-2.0](https://longcat.chat/blog/longcat-2.0/), specializing in environment and task synthesis for agentic tool-use in post-training.
 
 - *2026.07 - now*, <img src='./images/logos/baidu.png' style='width: 2.1em;'> Baidu AI Cloud <img src='./images/logos/aicloud.png' style='width: 2.1em;'>, Agent Policy Group, Beijing, China. Research intern.
