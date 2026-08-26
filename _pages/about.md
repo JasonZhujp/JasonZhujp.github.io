@@ -17,7 +17,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am currently a second-year PhD Student at the School of Data Science and Engineering, East China Normal University, under the supervision of [Prof. Weining Qian](https://scholar.google.com.hk/citations?hl=zh-CN&user=KqqoR6gAAAAJ) and [Prof. Xiang Li](https://lixiang3776.github.io/) in the PLANING (graPh mining and LANguage processING) lab.
+I am currently a third-year PhD Student at the School of Data Science and Engineering, East China Normal University, under the supervision of [Prof. Weining Qian](https://scholar.google.com.hk/citations?hl=zh-CN&user=KqqoR6gAAAAJ) and [Prof. Xiang Li](https://lixiang3776.github.io/) in the PLANING (graPh mining and LANguage processING) lab.
 
 My research interests include:
 - **Agentic Reinforcement Learning**: algorithms and applications in agentic tool use, skill augmentation.
@@ -36,11 +36,13 @@ My research interests include:
 
 {% include_relative includes/pub.md %}
 
+<span class='anchor' id='internships'></span>
 
-# 🏆 Honors and Awards
-- *2022-2026* Graduate Academic Scholarship, East China Normal University
-- *2022.06* Outstanding Graduate, East China University of Science and Technology
-- *2018-2022* Academic Excellence Scholarship, East China University of Science and Technology 
+# 💻 Internships
+- *2025.09 - 2026.06*, <img src='./images/logos/meituan.png' style='width: 2.1em;'> Meituan Longcat Team <img src='./images/logos/longcat.png' style='width: 2.1em;'>, Shanghai, China. Contributed to [Longcat-flash-thinking-2601](https://arxiv.org/abs/2601.16725) and [LongCat-2.0](https://longcat.chat/blog/longcat-2.0/), specializing in environment and task synthesis for agentic tool-use in post-training.
+
+- *2026.07 - now*, <img src='./images/logos/baidu.png' style='width: 2.1em;'> Baidu AI Cloud <img src='./images/logos/aicloud.png' style='width: 2.1em;'>, Agent Policy Group, Beijing, China. Research intern.
+
 
 <span class='anchor' id='educations'></span>
 
@@ -49,13 +51,12 @@ My research interests include:
 - *2018.09 - 2022.06*, Undergraduate, School of Information Science and Engineering, East China University of Science and Technology  <img src='./images/logos/ecust.png' style='width: 2.5em;'>
 
 
+# 🏆 Honors and Awards
+- *2022-2026* Graduate Academic Scholarship, East China Normal University
+- *2022.06* Outstanding Graduate, East China University of Science and Technology
+- *2018-2022* Academic Excellence Scholarship, East China University of Science and Technology 
+
+
 <!-- # 💬 Invited Talks
 - *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
 - *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/) -->
-
-<span class='anchor' id='internships'></span>
-
-# 💻 Internships
-- *2025.09 - 2026.06*, <img src='./images/logos/meituan.png' style='width: 2.1em;'> Meituan Longcat Team <img src='./images/logos/longcat.png' style='width: 2.1em;'>, Shanghai, China. Contributed to [Longcat-flash-thinking-2601](https://arxiv.org/abs/2601.16725) and [LongCat-2.0](https://longcat.chat/blog/longcat-2.0/), specializing in environment and task synthesis for agentic tool-use in post-training.
-
-- *2026.07 - now*, <img src='./images/logos/baidu.png' style='width: 2.1em;'> Baidu AI Cloud <img src='./images/logos/aicloud.png' style='width: 2.1em;'>, Agent Policy Group, Beijing, China. Research intern.
