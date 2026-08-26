@@ -41,7 +41,7 @@ My research interests include:
 # 💻 Internships
 - *2025.09 - 2026.06*, <img src='./images/logos/meituan.png' style='width: 2.1em;'> Meituan Longcat Team <img src='./images/logos/longcat.png' style='width: 2.1em;'>, Shanghai, China. Contributed to [Longcat-flash-thinking-2601](https://arxiv.org/abs/2601.16725) and [LongCat-2.0](https://longcat.chat/blog/longcat-2.0/), specializing in environment and task synthesis for agentic tool-use in post-training.
 
-- *2026.07 - now*, <img src='./images/logos/baidu.png' style='width: 2.1em;'> Baidu AI Cloud <img src='./images/logos/aicloud.png' style='width: 2.1em;'>, Agent Policy Group, Beijing, China. Research intern.
+- *2026.07 - now*, <img src='./images/logos/baidu.png' style='width: 2.1em;'> Baidu AI Cloud <img src='./images/logos/aicloud.png' style='width: 2.1em;'>, Agent Policy Group, Beijing, China. Research intern focusing on harness evolution.
 
 
 <span class='anchor' id='educations'></span>
